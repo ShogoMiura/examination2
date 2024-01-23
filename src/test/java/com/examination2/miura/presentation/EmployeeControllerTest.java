@@ -1,4 +1,4 @@
-package com.examination2.examination2.presentation;
+package com.examination2.miura.presentation;
 
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;

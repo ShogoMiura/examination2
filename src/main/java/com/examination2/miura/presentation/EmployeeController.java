@@ -1,4 +1,4 @@
-package com.examination2.examination2.presentation;
+package com.examination2.miura.presentation;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

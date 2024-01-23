@@ -1,4 +1,4 @@
-package com.examination2.examination2.steps;
+package com.examination2.miura.steps;
 
 import io.cucumber.spring.ScenarioScope;
 import io.restassured.response.Response;

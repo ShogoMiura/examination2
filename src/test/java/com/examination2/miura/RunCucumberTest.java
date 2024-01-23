@@ -1,4 +1,4 @@
-package com.examination2.examination2;
+package com.examination2.miura;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
