@@ -13,21 +13,21 @@ import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 @WebMvcTest
 class EmployeeControllerTest {
 
-    @Autowired
-    MockMvc mockMvc;
+  @Autowired
+  MockMvc mockMvc;
 
-    @BeforeEach
-    void setUp() {
-        RestAssuredMockMvc.mockMvc(mockMvc);
-    }
+  @BeforeEach
+  void setUp() {
+    RestAssuredMockMvc.mockMvc(mockMvc);
+  }
 
-    @Test
-    void ルートURLへのアクセスを受け付ける() {
-        given()
-                .when()
-                .get("/")
-                .then()
-                .statusCode(200);
-    }
+  @Test
+  void ルートURLへのアクセスを受け付ける() {
+    given()
+            .when()
+            .get("/")
+            .then()
+            .statusCode(200);
+  }
 
 }

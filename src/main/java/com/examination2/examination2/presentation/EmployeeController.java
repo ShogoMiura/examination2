@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class EmployeeController {
 
-    /**
-     * ルートエンドポイントへのHTTP GETリクエストを処理します。
-     */
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void getRoot() {
+  /**
+   * ルートエンドポイントへのHTTP GETリクエストを処理します。
+   */
+  @GetMapping
+  @ResponseStatus(HttpStatus.OK)
+  public void getRoot() {
 
-    }
+  }
 }

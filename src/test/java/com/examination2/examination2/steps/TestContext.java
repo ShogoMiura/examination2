@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 @ScenarioScope
 public class TestContext {
 
-    private Response response;
+  private Response response;
 
-    private String id;
+  private String id;
 
 }

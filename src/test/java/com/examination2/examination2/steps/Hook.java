@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class Hook {
 
-    @Autowired
-    Configuration configuration;
+  @Autowired
+  Configuration configuration;
 
-    @Before
-    public void setRestAssured() {
-        RestAssured.baseURI = configuration.getBaseUri();
-    }
+  @Before
+  public void setRestAssured() {
+    RestAssured.baseURI = configuration.getBaseUri();
+  }
 
 }

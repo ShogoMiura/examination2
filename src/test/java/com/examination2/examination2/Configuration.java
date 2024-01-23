@@ -11,6 +11,6 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "environment")
 public class Configuration {
 
-    private String baseUri;
+  private String baseUri;
 
 }
