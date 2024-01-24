@@ -19,6 +19,6 @@ public class EmployeeController {
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
   public void getRoot() {
-
+    // do nothing
   }
 }

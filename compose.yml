@@ -1,0 +1,26 @@
+version: "3"
+services:
+  examination2:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - examination2-nw
+    healthcheck:
+      test: "curl -f http://localhost:8080/actuator/health || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  sonarqube:
+    image: sonarqube:10.3.0-community
+    ports:
+      - "9000:9000"
+    profiles: [ "local" ]
+
+networks:
+  examination2-nw:
+    driver: bridge
