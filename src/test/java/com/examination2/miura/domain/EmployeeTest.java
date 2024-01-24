@@ -39,7 +39,7 @@ class EmployeeTest {
     // execute & assert
     assertThatThrownBy(() -> new Employee("1", TOO_LONG_NAME, "Tanaka"))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("従業員の名前が100文字より大きいですです。");
+            .hasMessage("従業員の名前が100文字より大きいです。");
   }
 
   @Test
