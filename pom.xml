@@ -20,6 +20,7 @@
         <assertj-core.version>3.24.2</assertj-core.version>
         <rest-assured.version>5.3.2</rest-assured.version>
         <commons-validator.version>1.7</commons-validator.version>
+        <commons-lang3.version>3.14.0</commons-lang3.version>
 
     </properties>
 
@@ -52,6 +53,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
 
         <!-- ============================ -->

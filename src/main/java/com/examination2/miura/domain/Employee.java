@@ -1,6 +1,7 @@
 package com.examination2.miura.domain;
 
 import static java.util.Objects.isNull;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 /**
  * 従業員情報を表すレコードクラスです。
@@ -12,11 +13,9 @@ import static java.util.Objects.isNull;
  */
 public record Employee(String id, String firstName, String lastName) {
 
-  public Employee(String id, String firstName, String lastName) {
+  public Employee {
     if (isNull(id)) throw new IllegalArgumentException("従業員IDがnullです。");
-
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    if (!isNumeric(id)) throw new IllegalArgumentException("従業員IDが数字ではありません。");
+    if (id.length() > 10) throw new IllegalArgumentException("従業員IDが大きすぎます。");
   }
 }
