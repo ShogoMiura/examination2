@@ -9,6 +9,7 @@ class EmployeeTest {
   void 従業員IDがnullの場合に例外が発生する() {
     // execute & assert
       assertThatThrownBy(() -> new Employee(null, "Taro", "Tanaka"))
-              .isInstanceOf(RuntimeException.class);
+              .isInstanceOf(IllegalArgumentException.class)
+              .hasMessage("従業員IDがnullです。");
   }
 }
