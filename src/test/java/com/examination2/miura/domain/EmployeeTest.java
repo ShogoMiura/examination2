@@ -1,31 +1,25 @@
 package com.examination2.miura.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class EmployeeTest {
 
-  @Test
-  void 従業員IDがnullの場合に例外が発生する() {
+  @ParameterizedTest
+  @CsvSource(textBlock = """
+    #     value, message
+               , 従業員IDがnullです。
+          あいう, 従業員IDが数字ではありません。
+            abc, 従業員IDが数字ではありません。
+    11111111111, 従業員IDは1 から9999999999 までの数字です。
+              0, 従業員IDは1 から9999999999 までの数字です。
+    """)
+  void 従業員IDのガード条件に違反する場合(String value, String message) {
     // execute & assert
-      assertThatThrownBy(() -> new Employee(null, "Taro", "Tanaka"))
-              .isInstanceOf(IllegalArgumentException.class)
-              .hasMessage("従業員IDがnullです。");
-  }
-
-  @Test
-  void 従業員IDが数字以外の場合に例外が発生する() {
-    // execute & assert
-    assertThatThrownBy(() -> new Employee("a", "Taro", "Tanaka"))
+    assertThatThrownBy(() -> new Employee(value, "Taro", "Tanaka"))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("従業員IDが数字ではありません。");
-  }
-
-  @Test
-  void 従業員IDが11桁以上の場合に例外が発生する() {
-    // execute & assert
-    assertThatThrownBy(() -> new Employee("11111111111", "Taro", "Tanaka"))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("従業員IDが大きすぎます。");
+            .hasMessage(message);
   }
 }

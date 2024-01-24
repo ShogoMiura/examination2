@@ -16,6 +16,6 @@ public record Employee(String id, String firstName, String lastName) {
   public Employee {
     if (isNull(id)) throw new IllegalArgumentException("従業員IDがnullです。");
     if (!isNumeric(id)) throw new IllegalArgumentException("従業員IDが数字ではありません。");
-    if (id.length() > 10) throw new IllegalArgumentException("従業員IDが大きすぎます。");
+    if (id.length() > 10 | id.equals("0")) throw new IllegalArgumentException("従業員IDは1 から9999999999 までの数字です。");
   }
 }
