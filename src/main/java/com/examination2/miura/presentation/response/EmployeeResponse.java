@@ -18,7 +18,17 @@ public record EmployeeResponse(
         @JsonProperty("lastName")
         String lastName
 ) {
+  /**
+   * EmployeeオブジェクトからEmployeeResponseオブジェクトを生成するためのファクトリーメソッドです。
+   *
+   * @param employee 変換元のEmployeeオブジェクト
+   * @return 生成されたEmployeeResponseオブジェクト
+   */
   public static EmployeeResponse of(Employee employee) {
-    return null;
+    return new EmployeeResponse(
+            employee.id(),
+            employee.firstName(),
+            employee.lastName()
+    );
   }
 }
