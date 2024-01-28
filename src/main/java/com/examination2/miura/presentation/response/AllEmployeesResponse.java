@@ -1,5 +1,6 @@
 package com.examination2.miura.presentation.response;
 
+import com.examination2.miura.domain.Employee;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public record AllEmployeesResponse(
         @JsonProperty("employees")
         List<EmployeeResponse> allEmployeesResponse
 ) {
-  public AllEmployeesResponse of() {
+  public static AllEmployeesResponse of(List<Employee> employees) {
     return null;
   }
 }
