@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class EmployeeResponseTest {
   @Test
-  void EmployeeからEmployeeResponseが作成できる() {
+  void EmployeeからEmployeeResponseが生成できる場合() {
     // setup
     Employee employee = new Employee("1", "Taro", "Yamada");
 

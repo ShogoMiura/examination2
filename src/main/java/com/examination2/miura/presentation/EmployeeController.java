@@ -1,11 +1,7 @@
 package com.examination2.miura.presentation;
 
 import com.examination2.miura.application.FindAllEmployeesUseCase;
-import com.examination2.miura.domain.Employee;
 import com.examination2.miura.presentation.response.AllEmployeesResponse;
-import com.examination2.miura.presentation.response.EmployeeResponse;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
