@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/")
 public class EmployeeController {
-  private final FindAllEmployeesUseCase findAll;
+  private final FindAllEmployeesUseCase findAllEmployeesUseCase;
 
   /**
    * ルートエンドポイントへのHTTP GETリクエストを処理します。
@@ -39,13 +39,6 @@ public class EmployeeController {
   @GetMapping("/v1/employees")
   @ResponseStatus(HttpStatus.OK)
   public AllEmployeesResponse findALlEmployees() {
-    List<Employee> employeeList = findAll.execute();
-    List<EmployeeResponse> responseList = new ArrayList<>();
-    for (Employee employee : employeeList) {
-      responseList.add(new EmployeeResponse(employee.id(), employee.firstName(), employee.lastName()));
-    }
-
-    AllEmployeesResponse result = new AllEmployeesResponse(responseList);
-    return result;
+    return AllEmployeesResponse.of(findAllEmployeesUseCase.execute());
   }
 }
