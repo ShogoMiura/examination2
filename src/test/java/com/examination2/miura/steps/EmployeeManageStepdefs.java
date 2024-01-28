@@ -45,7 +45,7 @@ public class EmployeeManageStepdefs {
 
   @前提("適切なBaseURIが指定されている")
   public void 適切なbaseuriが指定されている() {
-    String[] schemes = new String[]{"http", "https"};
+    String[] schemes = new String[] {"http", "https"};
     UrlValidator urlValidator = new UrlValidator(schemes, UrlValidator.ALLOW_LOCAL_URLS);
     boolean actual = urlValidator.isValid(configuration.getBaseUri());
     assertThat(actual).isTrue();

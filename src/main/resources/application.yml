@@ -1,2 +1,15 @@
-environment:
-  baseUri: http://localhost:8080
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sample
+    username: user
+    password: password
+    db: sample
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 2
+      maximum-pool-size: 5
