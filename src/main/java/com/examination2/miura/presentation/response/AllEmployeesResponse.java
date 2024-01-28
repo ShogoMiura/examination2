@@ -12,4 +12,7 @@ public record AllEmployeesResponse(
         @JsonProperty("employees")
         List<EmployeeResponse> allEmployeesResponse
 ) {
+  public AllEmployeesResponse of() {
+    return null;
+  }
 }
