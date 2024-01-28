@@ -228,4 +228,18 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <flyway.user>user</flyway.user>
+                <flyway.password>password</flyway.password>
+                <flyway.url>jdbc:postgresql://localhost:5432/sample</flyway.url>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>
