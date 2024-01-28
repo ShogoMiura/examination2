@@ -1,5 +1,6 @@
 package com.examination2.miura.presentation;
 
+import com.examination2.miura.presentation.response.AllEmployeesResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,5 +21,9 @@ public class EmployeeController {
   @ResponseStatus(HttpStatus.OK)
   public void getRoot() {
     // do nothing
+  }
+
+  public AllEmployeesResponse findALlEmployees() {
+    return null;
   }
 }
