@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
+import static java.util.Collections.emptyList;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,6 +40,20 @@ class FindAllEmployeesUseCaseTest {
             new Employee("1", "Taro", "Yamada"),
             new Employee("2", "Jiro", "Yamada")
     );
+
+    // execute
+    List<Employee> actual = sut.execute();
+
+    // assert
+    assertThat(actual).isEqualTo(expected);
+  }
+
+  @Test
+  void データが存在しない場合() {
+    // setup
+    when(repository.findAllEmployees()).thenReturn(emptyList());
+
+    List<Employee> expected = emptyList();
 
     // execute
     List<Employee> actual = sut.execute();
