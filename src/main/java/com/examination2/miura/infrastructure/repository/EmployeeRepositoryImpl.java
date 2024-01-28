@@ -4,16 +4,23 @@ import com.examination2.miura.domain.Employee;
 import com.examination2.miura.domain.EmployeeRepository;
 import com.examination2.miura.infrastructure.entity.EmployeeEntity;
 import com.examination2.miura.infrastructure.mapper.EmployeeMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
+/**
+ * 従業員リポジトリの実装クラスです。
+ */
+@RequiredArgsConstructor
+@Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
-  @Autowired
-  private EmployeeMapper mapper;
+  private final EmployeeMapper mapper;
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public List<Employee> findAllEmployees() {
     List<EmployeeEntity> employeeEntities = mapper.findAllEmployees();
@@ -25,4 +32,5 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     return result;
   }
+
 }
