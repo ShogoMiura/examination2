@@ -5,7 +5,6 @@ import com.examination2.miura.domain.EmployeeRepository;
 import com.examination2.miura.infrastructure.entity.EmployeeEntity;
 import com.examination2.miura.infrastructure.mapper.EmployeeMapper;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +24,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   public List<Employee> findAllEmployees() {
     return mapper.findAllEmployees().stream()
             .map(EmployeeEntity::convertToEmployee)
-            .collect(Collectors.toList());
+            .toList();
   }
 }
-
