@@ -12,7 +12,12 @@ import com.examination2.miura.domain.Employee;
  */
 public record EmployeeEntity(String id, String firstName, String lastName) {
 
+  /**
+   * 従業員エンティティをドメインモデルである従業員クラスに変換します。
+   *
+   * @return Employeeオブジェクト。
+   */
   public Employee convertToEmployee() {
-    return null;
+    return new Employee(id, firstName, lastName);
   }
 }
