@@ -13,7 +13,14 @@ public record AllEmployeesResponse(
         @JsonProperty("employees")
         List<EmployeeResponse> allEmployeesResponse
 ) {
+  /**
+   * EmployeeオブジェクトのリストからAllEmployeesResponseオブジェクトを生成するためのファクトリーメソッドです。
+   * リスト内の各Employeeオブジェクトは、EmployeeResponse.ofメソッドを使用して対応するEmployeeResponseオブジェクトに変換されます。
+   *
+   * @param employees 変換元のEmployeeオブジェクトのリスト。
+   * @return 生成されたAllEmployeesResponseオブジェクト。
+   */
   public static AllEmployeesResponse of(List<Employee> employees) {
-    return null;
+    return new AllEmployeesResponse(employees.stream().map(EmployeeResponse::of).toList());
   }
 }
