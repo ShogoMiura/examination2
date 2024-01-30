@@ -102,7 +102,7 @@ class EmployeeMapperTest {
   @DataSet(value = "datasets/setup/employees.yml")
   @ExpectedDataSet(value = "datasets/expected/after-insert-employees.yml")
   @Test
-  void 従業員の新規登録が正常に行える() {
+  void 従業員の新規登録が正常に行える場合() {
     // execute & assert
     sut.insert(new EmployeeEntity("3", "Saburo", "Yamada"));
   }

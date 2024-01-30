@@ -46,5 +46,7 @@ public interface EmployeeMapper {
    *
    * @return 次の従業員ID
    */
+  @Select("SELECT nextval('EMPLOYEE_ID_SEQ')")
+  @Options(flushCache = Options.FlushCachePolicy.TRUE)
   Long getNextEmployeeId();
 }
