@@ -1,6 +1,7 @@
 package com.examination2.miura.infrastructure.repository;
 
 import static java.util.Collections.emptyList;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -118,18 +119,33 @@ class EmployeeRepositoryImplTest {
     assertThat(actual).isEqualTo(expected);
   }
 
-  @Test
-  void 従業員の新規登録が正常に行える場合() {
-    // setup
-    when(mapper.insert(new EmployeeEntity("3", "Saburo", "Yamada")))
-            .thenReturn(1);
+  @Nested
+  class 新規登録 {
+    @Test
+    void 従業員の新規登録が正常に行える場合() {
+      // setup
+      when(mapper.insert(new EmployeeEntity("3", "Saburo", "Yamada")))
+              .thenReturn(1);
 
-    Employee expected = new Employee("3", "Saburo", "Yamada");
+      Employee expected = new Employee("3", "Saburo", "Yamada");
 
-    // execute
-    Employee actual = sut.create(new EmployeeEntity("3", "Saburo", "Yamada"));
+      // execute
+      Employee actual = sut.create(new EmployeeEntity("3", "Saburo", "Yamada"));
 
-    // assert
-    assertThat(actual).isEqualTo(expected);
+      // assert
+      assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void 従業員の新規登録が正常に行えない場合() {
+      // setup
+      when(mapper.insert(new EmployeeEntity("3", "Saburo", "Yamada")))
+              .thenReturn(0);
+
+      // execute & assert
+      assertThatThrownBy(() -> sut.create(new EmployeeEntity("3", "Saburo", "Yamada")))
+              .isInstanceOf(RuntimeException.class);
+
+    }
   }
 }
