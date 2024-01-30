@@ -91,6 +91,11 @@ class EmployeeMapperTest {
     @DataSet(value = "datasets/setup/employees.yml")
     @ExpectedDataSet(value = "datasets/expected/employees.yml")
     void 指定したIDの従業員が存在しない場合() {
+      // execute
+      EmployeeEntity actual = sut.findById("99");
+
+      // assert
+      assertThat(actual).isNull();
     }
   }
 }
