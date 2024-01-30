@@ -5,6 +5,8 @@ import com.examination2.miura.domain.EmployeeRepository;
 import com.examination2.miura.infrastructure.entity.EmployeeEntity;
 import com.examination2.miura.infrastructure.mapper.EmployeeMapper;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -25,5 +27,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     return mapper.findAll().stream()
             .map(EmployeeEntity::convertToEmployee)
             .toList();
+  }
+
+  @Override
+  public Optional<Employee> findEmployeeById(String id) {
+    return null;
   }
 }

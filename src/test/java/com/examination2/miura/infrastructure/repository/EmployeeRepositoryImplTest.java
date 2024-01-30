@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Collections.emptyList;
 import static org.mockito.Mockito.when;
@@ -62,6 +63,38 @@ class EmployeeRepositoryImplTest {
 
       // execute
       List<Employee> actual = sut.findAllEmployees();
+
+      // assert
+      assertThat(actual).isEqualTo(expected);
+    }
+  }
+
+  @Nested
+  class ID検索 {
+    @Test
+    void ID検索できる場合() {
+      // setup
+      when(mapper.findById("1"))
+              .thenReturn(new EmployeeEntity("1", "Taro", "Yamada"));
+
+      Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
+
+      // execute
+      Optional<Employee> actual = sut.findEmployeeById("1");
+
+      // assert
+      assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void 指定したIDが存在しない場合() {
+      // setup
+      when(mapper.findById("1")).thenReturn(null);
+
+      Optional<Employee> expected = Optional.empty();
+
+      // execute
+      Optional<Employee> actual = sut.findEmployeeById("99");
 
       // assert
       assertThat(actual).isEqualTo(expected);

@@ -1,6 +1,7 @@
 package com.examination2.miura.domain;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 従業員情報に関するクエリを実行するためのリポジトリインターフェースです。
@@ -14,4 +15,6 @@ public interface EmployeeRepository {
    * @return すべての従業員を表す Employee オブジェクトのリスト。
    */
   List<Employee> findAllEmployees();
+
+  Optional<Employee> findEmployeeById(String id);
 }
