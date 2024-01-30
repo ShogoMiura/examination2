@@ -89,7 +89,7 @@ class EmployeeRepositoryImplTest {
     @Test
     void 指定したIDが存在しない場合() {
       // setup
-      when(mapper.findById("1")).thenReturn(null);
+      when(mapper.findById("99")).thenReturn(null);
 
       Optional<Employee> expected = Optional.empty();
 
