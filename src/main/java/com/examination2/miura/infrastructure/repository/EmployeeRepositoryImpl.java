@@ -51,7 +51,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
    * {@inheritDoc}
    */
   @Override
-  public Employee create(Employee employee) {
+  public Employee createEmployee(Employee employee) {
     Integer num = mapper.insert(
             new EmployeeEntity(employee.id(), employee.firstName(), employee.lastName())
     );

@@ -37,5 +37,5 @@ public interface EmployeeRepository {
    * @param employee 登録する従業員の情報を含むEmployee オブジェクト。
    * @return 登録された従業員の情報を含むEmployee オブジェクト。
    */
-  Employee create(Employee employee);
+  Employee createEmployee(Employee employee);
 }
