@@ -1,7 +1,5 @@
 package com.examination2.miura.domain;
 
-import com.examination2.miura.infrastructure.entity.EmployeeEntity;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -33,5 +31,11 @@ public interface EmployeeRepository {
    */
   Long getNextEmployeeId();
 
+  /**
+   * データベースに従業員情報を登録します。
+   *
+   * @param employee 登録する従業員の情報を含むEmployee オブジェクト。
+   * @return 登録された従業員の情報を含むEmployee オブジェクト。
+   */
   Employee create(Employee employee);
 }

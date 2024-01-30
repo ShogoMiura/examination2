@@ -5,6 +5,7 @@ import static java.util.Objects.nonNull;
 import com.examination2.miura.domain.Employee;
 import com.examination2.miura.domain.EmployeeRepository;
 import com.examination2.miura.infrastructure.entity.EmployeeEntity;
+import com.examination2.miura.infrastructure.exception.DatabaseExecutionException;
 import com.examination2.miura.infrastructure.mapper.EmployeeMapper;
 import java.util.List;
 import java.util.Optional;
@@ -46,8 +47,16 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     return mapper.getNextEmployeeId();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Employee create(Employee employee) {
-    return null;
+    Integer num = mapper.insert(
+            new EmployeeEntity(employee.id(), employee.firstName(), employee.lastName())
+    );
+    if (num == 0) throw new DatabaseExecutionException("SQLの実行に失敗しました。");
+
+    return employee;
   }
 }
