@@ -1,12 +1,13 @@
 package com.examination2.miura.infrastructure.repository;
 
+import static java.util.Objects.nonNull;
+
 import com.examination2.miura.domain.Employee;
 import com.examination2.miura.domain.EmployeeRepository;
 import com.examination2.miura.infrastructure.entity.EmployeeEntity;
 import com.examination2.miura.infrastructure.mapper.EmployeeMapper;
 import java.util.List;
 import java.util.Optional;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -29,8 +30,14 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             .toList();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Optional<Employee> findEmployeeById(String id) {
-    return null;
+    if (nonNull(mapper.findById(id))) {
+      return Optional.of(mapper.findById(id).convertToEmployee());
+    }
+    return Optional.empty();
   }
 }
