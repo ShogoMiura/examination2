@@ -31,5 +31,13 @@ public interface EmployeeMapper {
   @Select("SELECT * FROM employees WHERE id = #{id}")
   EmployeeEntity findById(String id);
 
+
+  /**
+   * 新しい従業員をデータベースに登録します。
+   *
+   * @param employeeEntity データベースに登録する新しい従業員のエンティティ。
+   */
+  @Insert("INSERT INTO employees (id, first_name, last_name) "
+          + "VALUES (#{id}, #{firstName}, #{lastName})")
   void insert(EmployeeEntity employeeEntity);
 }
