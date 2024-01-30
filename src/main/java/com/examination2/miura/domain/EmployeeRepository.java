@@ -1,5 +1,7 @@
 package com.examination2.miura.domain;
 
+import com.examination2.miura.infrastructure.entity.EmployeeEntity;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -30,4 +32,6 @@ public interface EmployeeRepository {
    * @return 次の従業員IDの値。
    */
   Long getNextEmployeeId();
+
+  Employee create(EmployeeEntity employeeEntity);
 }

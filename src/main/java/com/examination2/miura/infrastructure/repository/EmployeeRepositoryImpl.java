@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
-
   private final EmployeeMapper mapper;
 
   /**
@@ -45,5 +44,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   @Override
   public Long getNextEmployeeId() {
     return mapper.getNextEmployeeId();
+  }
+
+  @Override
+  public Employee create(EmployeeEntity employeeEntity) {
+    return null;
   }
 }
