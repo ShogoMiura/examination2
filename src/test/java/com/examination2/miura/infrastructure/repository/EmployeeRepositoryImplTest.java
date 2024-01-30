@@ -99,4 +99,18 @@ class EmployeeRepositoryImplTest {
       assertThat(actual).isEqualTo(expected);
     }
   }
+
+  @Test
+  void 次のシーケンスを取得できる() {
+    // setup
+    when(mapper.getNextEmployeeId()).thenReturn(1L);
+
+    Long expected = 1L;
+
+    // execute
+    Long actual = sut.getNextEmployeeId();
+
+    // assert
+    assertThat(actual).isEqualTo(expected);
+  }
 }

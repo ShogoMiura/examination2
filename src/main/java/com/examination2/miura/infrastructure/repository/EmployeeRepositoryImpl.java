@@ -38,4 +38,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
     return Optional.empty();
   }
+
+  @Override
+  public Long getNextEmployeeId() {
+    return null;
+  }
 }

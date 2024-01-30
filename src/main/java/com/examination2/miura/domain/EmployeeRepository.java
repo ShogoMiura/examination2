@@ -23,4 +23,6 @@ public interface EmployeeRepository {
    * @return データベースから取得したOptionalのEmployee オブジェクト。従業員が見つからなかった場合は空のOptional。
    */
   Optional<Employee> findEmployeeById(String id);
+
+  Long getNextEmployeeId();
 }
