@@ -2,6 +2,7 @@ package com.examination2.miura.presentation;
 
 import com.examination2.miura.application.FindAllEmployeesUseCase;
 import com.examination2.miura.application.FindEmployeeByIdUseCase;
+import com.examination2.miura.application.exception.EmployeeNotFoundException;
 import com.examination2.miura.domain.Employee;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
@@ -103,7 +104,7 @@ class EmployeeControllerTest {
     void 指定したIDで従業員情報が取得できない場合() {
       // setup
       when(findEmployeeByIdUseCase.execute("99"))
-              .thenThrow(new RuntimeException("指定したIDの従業員情報は存在しません。"));
+              .thenThrow(new EmployeeNotFoundException("99"));
 
       // execute & assert
       given()
@@ -112,7 +113,7 @@ class EmployeeControllerTest {
               .then()
               .statusCode(400)
               .body("code", is("0003"))
-              .body("message", is("specified employee [id = 1] is not found."))
+              .body("message", is("specified employee [id = 99] is not found."))
               .body("details", is(Collections.EMPTY_LIST));
     }
   }
