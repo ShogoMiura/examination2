@@ -40,4 +40,11 @@ public interface EmployeeMapper {
   @Insert("INSERT INTO employees (id, first_name, last_name) "
           + "VALUES (#{id}, #{firstName}, #{lastName})")
   void insert(EmployeeEntity employeeEntity);
+
+  /**
+   * データベースから次の従業員IDを取得するメソッドです。
+   *
+   * @return 次の従業員ID
+   */
+  Long getNextEmployeeId();
 }

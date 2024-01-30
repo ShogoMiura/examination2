@@ -106,4 +106,18 @@ class EmployeeMapperTest {
     // execute & assert
     sut.insert(new EmployeeEntity("3", "Saburo", "Yamada"));
   }
+
+  @Test
+  @DataSet(value = "datasets/setup/employees.yml")
+  @ExpectedDataSet(value = "datasets/expected/employees.yml")
+  void 次の従業員IDのシーケンスが取得できる場合() {
+    // setup
+    Long expected = 3L;
+
+    // execute
+    Long actual = sut.getNextEmployeeId();
+
+    // assert
+    assertThat(actual).isEqualTo(expected);
+  }
 }
