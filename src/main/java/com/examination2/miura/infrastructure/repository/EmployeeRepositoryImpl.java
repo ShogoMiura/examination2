@@ -39,8 +39,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     return Optional.empty();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Long getNextEmployeeId() {
-    return null;
+    return mapper.getNextEmployeeId();
   }
 }

@@ -24,5 +24,10 @@ public interface EmployeeRepository {
    */
   Optional<Employee> findEmployeeById(String id);
 
+  /**
+   * データベースから次の従業員IDの値を取得します。
+   *
+   * @return 次の従業員IDの値。
+   */
   Long getNextEmployeeId();
 }
