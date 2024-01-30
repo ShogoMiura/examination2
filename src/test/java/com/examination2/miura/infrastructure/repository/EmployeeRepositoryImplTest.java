@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.examination2.miura.domain.Employee;
 import com.examination2.miura.infrastructure.entity.EmployeeEntity;
+import com.examination2.miura.infrastructure.exception.DatabaseExecutionException;
 import com.examination2.miura.infrastructure.mapper.EmployeeMapper;
 import java.util.List;
 import java.util.Optional;
@@ -144,7 +145,8 @@ class EmployeeRepositoryImplTest {
 
       // execute & assert
       assertThatThrownBy(() -> sut.create(new EmployeeEntity("3", "Saburo", "Yamada")))
-              .isInstanceOf(RuntimeException.class);
+              .isInstanceOf(DatabaseExecutionException.class)
+              .hasMessage("SQLの実行に失敗しました。");
 
     }
   }
