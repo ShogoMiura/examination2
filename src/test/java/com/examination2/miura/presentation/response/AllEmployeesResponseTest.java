@@ -1,11 +1,10 @@
 package com.examination2.miura.presentation.response;
 
-import com.examination2.miura.domain.Employee;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import com.examination2.miura.domain.Employee;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class AllEmployeesResponseTest {
   @Test

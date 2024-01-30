@@ -1,10 +1,16 @@
 package com.examination2.miura.presentation;
 
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.when;
+
 import com.examination2.miura.application.FindAllEmployeesUseCase;
 import com.examination2.miura.application.FindEmployeeByIdUseCase;
 import com.examination2.miura.application.exception.EmployeeNotFoundException;
 import com.examination2.miura.domain.Employee;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
+import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -14,14 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Collections;
-import java.util.List;
-
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
-
 
 @WebMvcTest
 class EmployeeControllerTest {

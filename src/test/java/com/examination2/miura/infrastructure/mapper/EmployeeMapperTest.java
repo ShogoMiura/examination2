@@ -5,18 +5,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.examination2.miura.infrastructure.entity.EmployeeEntity;
 import com.github.database.rider.core.api.configuration.DBUnit;
+import com.github.database.rider.core.api.connection.ConnectionHolder;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.junit5.api.DBRider;
+import java.sql.DriverManager;
+import java.util.List;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.github.database.rider.core.api.connection.ConnectionHolder;
-import java.sql.DriverManager;
-import java.util.List;
 
 @SpringBootTest
 @DBUnit

@@ -1,9 +1,9 @@
 package com.examination2.miura.presentation.response;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.examination2.miura.domain.Employee;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class EmployeeResponseTest {
   @Test
