@@ -7,6 +7,8 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -76,21 +78,25 @@ class EmployeeControllerTest {
 
   @Nested
   class ID検索 {
-    @Test
-    void 指定したIDで従業員情報が正しく取得できる() {
+    @ParameterizedTest
+    @CsvSource(textBlock = """
+      1,Taro,Yamada
+      2,Jiro,Yamada
+      """)
+    void 指定したIDで従業員情報が正しく取得できる(String id, String firstName, String lastName) {
       // setup
-      when(findEmployeeByIdUseCase.execute("1"))
-              .thenReturn(new Employee("1", "Taro", "Yamada"));
+      when(findEmployeeByIdUseCase.execute(id))
+              .thenReturn(new Employee(id, firstName, lastName));
 
       // execute & assert
       given()
               .when()
-              .get("/v1/employees/1")
+              .get("/v1/employees/" + id)
               .then()
               .statusCode(200)
-              .body("id", is("1"))
-              .body("firstName", is("Taro"))
-              .body("lastName", is("Yamada"));
+              .body("id", is(id))
+              .body("firstName", is(firstName))
+              .body("lastName", is(lastName));
     }
 
     @Test
