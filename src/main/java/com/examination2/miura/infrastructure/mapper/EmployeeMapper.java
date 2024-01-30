@@ -27,4 +27,6 @@ public interface EmployeeMapper {
    */
   @Select("SELECT * FROM employees WHERE id = #{id}")
   EmployeeEntity findById(String id);
+
+  void insert(EmployeeEntity employeeEntity);
 }
