@@ -30,7 +30,7 @@ public class EmployeeController {
   /**
    * すべての従業員情報を返します。
    *
-   * @return すべての従業員情報を含む AllEmployeesResponse。
+   * @return すべての従業員情報を含む AllEmployeesResponseオブジェクト。
    */
   @GetMapping("/v1/employees")
   @ResponseStatus(HttpStatus.OK)

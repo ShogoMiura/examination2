@@ -12,15 +12,15 @@ public interface EmployeeRepository {
   /**
    * すべての従業員のリストを取得します。
    *
-   * @return すべての従業員を表す Employee オブジェクトのリスト。
+   * @return すべての従業員を表すEmployee オブジェクトのリスト。
    */
   List<Employee> findAllEmployees();
 
   /**
    * データベースから指定した従業員IDの従業員情報を取得します。
    *
-   * @param id 従業員ID。
-   * @return データベースから取得した OptionalのEmployee オブジェクト。従業員が見つからなかった場合が空のOptional。
+   * @param id 従業員ID
+   * @return データベースから取得したOptionalのEmployee オブジェクト。従業員が見つからなかった場合は空のOptional。
    */
   Optional<Employee> findEmployeeById(String id);
 }

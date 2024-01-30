@@ -21,8 +21,8 @@ public record EmployeeResponse(
   /**
    * EmployeeオブジェクトからEmployeeResponseオブジェクトを生成するためのファクトリーメソッドです。
    *
-   * @param employee 変換元のEmployeeオブジェクト
-   * @return 生成されたEmployeeResponseオブジェクト
+   * @param employee 変換元のEmployeeオブジェクト。
+   * @return 生成されたEmployeeResponseオブジェクト。
    */
   public static EmployeeResponse of(Employee employee) {
     return new EmployeeResponse(
