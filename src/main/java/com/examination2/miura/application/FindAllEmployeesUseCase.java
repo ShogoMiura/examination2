@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
- * 従業員情報を取得するためのユースケースクラスです。
+ * 従業員情報を全件取得するためのユースケースクラスです。
  */
 @RequiredArgsConstructor
 @Service

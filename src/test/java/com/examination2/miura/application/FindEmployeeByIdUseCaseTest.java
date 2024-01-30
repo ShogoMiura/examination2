@@ -48,6 +48,8 @@ class FindEmployeeByIdUseCaseTest {
     when(repository.findEmployeeById("99")).thenReturn(Optional.empty());
 
     //execute & assert
-//    assertThatThrownBy(sut.execute("99")).isInstanceOf(RuntimeException.class).hasMessage("指定したIDは存在しません。");
+    assertThatThrownBy(() -> sut.execute("99"))
+            .isInstanceOf(RuntimeException.class)
+            .hasMessage("指定したIDの従業員は見つかりません。");
   }
 }
