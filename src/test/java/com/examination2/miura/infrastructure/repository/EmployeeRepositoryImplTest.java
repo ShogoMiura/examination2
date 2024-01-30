@@ -34,7 +34,7 @@ class EmployeeRepositoryImplTest {
     @Test
     void 全件検索できる場合() {
       // setup
-      when(mapper.findAllEmployees()).thenReturn(
+      when(mapper.findAll()).thenReturn(
               List.of(
                       new EmployeeEntity("1", "Taro", "Yamada"),
                       new EmployeeEntity("2", "Jiro", "Yamada")
@@ -56,7 +56,7 @@ class EmployeeRepositoryImplTest {
     @Test
     void データがない場合() {
       // setup
-      when(mapper.findAllEmployees()).thenReturn(emptyList());
+      when(mapper.findAll()).thenReturn(emptyList());
 
       List<Employee> expected = emptyList();
 

@@ -1,5 +1,7 @@
 package com.examination2.miura.infrastructure.mapper;
 
+import static java.util.Collections.emptyList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.examination2.miura.infrastructure.entity.EmployeeEntity;
 import com.github.database.rider.core.api.configuration.DBUnit;
@@ -13,12 +15,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.github.database.rider.core.api.connection.ConnectionHolder;
-
 import java.sql.DriverManager;
 import java.util.List;
-
-import static java.util.Collections.emptyList;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @DBUnit
@@ -52,7 +50,7 @@ class EmployeeMapperTest {
       );
 
       // execute
-      List<EmployeeEntity> actual = sut.findAllEmployees();
+      List<EmployeeEntity> actual = sut.findAll();
 
       // assert
       assertThat(actual).isEqualTo(expected);
@@ -66,10 +64,33 @@ class EmployeeMapperTest {
       List<EmployeeEntity> expected = emptyList();
 
       // execute
-      List<EmployeeEntity> actual = sut.findAllEmployees();
+      List<EmployeeEntity> actual = sut.findAll();
 
       // assert
       assertThat(actual).isEqualTo(expected);
+    }
+  }
+
+  @Nested
+  class ID検索 {
+    @Test
+    @DataSet(value = "datasets/setup/employees.yml")
+    @ExpectedDataSet(value = "datasets/expected/employees.yml")
+    void 従業員のID検索が正常に行える場合() {
+      // setup
+      EmployeeEntity expected = new EmployeeEntity("1", "Taro", "Yamada");
+
+      // execute
+      EmployeeEntity actual = sut.findById("1");
+
+      // assert
+      assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DataSet(value = "datasets/setup/employees.yml")
+    @ExpectedDataSet(value = "datasets/expected/employees.yml")
+    void 指定したIDの従業員が存在しない場合() {
     }
   }
 }

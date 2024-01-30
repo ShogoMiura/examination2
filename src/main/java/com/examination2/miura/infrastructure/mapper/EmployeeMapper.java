@@ -17,5 +17,7 @@ public interface EmployeeMapper {
    * @return 従業員テーブルから取得したEmployeeEntity オブジェクトのリスト
    */
   @Select("SELECT * FROM employees")
-  List<EmployeeEntity> findAllEmployees();
+  List<EmployeeEntity> findAll();
+
+  EmployeeEntity findById(String id);
 }

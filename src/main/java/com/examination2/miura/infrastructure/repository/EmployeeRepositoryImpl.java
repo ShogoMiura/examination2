@@ -22,7 +22,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
    */
   @Override
   public List<Employee> findAllEmployees() {
-    return mapper.findAllEmployees().stream()
+    return mapper.findAll().stream()
             .map(EmployeeEntity::convertToEmployee)
             .toList();
   }
