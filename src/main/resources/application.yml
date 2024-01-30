@@ -2,29 +2,29 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-#spring:
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/sample
-#    username: user
-#    password: password
-#    db: sample
-#    driver-class-name: org.postgresql.Driver
-#    type: com.zaxxer.hikari.HikariDataSource
-#    hikari:
-#      minimum-idle: 2
-#      maximum-pool-size: 5
-#    flyway:
-#      enabled: true
-
 spring:
   datasource:
-    url: jdbc:postgresql://dpg-cmrbqmf109ks73fhbv80-a/exam2
-    username: exam2_user
-    password: 8ifRyrhLgOhIQ6dsZ1BvMaAfePpJD8rR
+    url: jdbc:postgresql://localhost:5432/sample
+    username: user
+    password: password
+    db: sample
     driver-class-name: org.postgresql.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       minimum-idle: 2
       maximum-pool-size: 5
     flyway:
-        enabled: true
+      enabled: true
+
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://dpg-cmrbqmf109ks73fhbv80-a/exam2
+#    username: exam2_user
+#    password: 8ifRyrhLgOhIQ6dsZ1BvMaAfePpJD8rR
+#    driver-class-name: org.postgresql.Driver
+#    type: com.zaxxer.hikari.HikariDataSource
+#    hikari:
+#      minimum-idle: 2
+#      maximum-pool-size: 5
+#    flyway:
+#        enabled: true

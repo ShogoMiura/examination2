@@ -4,6 +4,7 @@ import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.examination2.miura.application.exception.EmployeeNotFoundException;
 import com.examination2.miura.domain.Employee;
 import com.examination2.miura.domain.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,7 +50,6 @@ class FindEmployeeByIdUseCaseTest {
 
     //execute & assert
     assertThatThrownBy(() -> sut.execute("99"))
-            .isInstanceOf(RuntimeException.class)
-            .hasMessage("指定したIDの従業員は見つかりません。");
+            .isInstanceOf(EmployeeNotFoundException.class);
   }
 }

@@ -1,5 +1,6 @@
 package com.examination2.miura.application;
 
+import com.examination2.miura.application.exception.EmployeeNotFoundException;
 import com.examination2.miura.domain.Employee;
 import com.examination2.miura.domain.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,6 @@ public class FindEmployeeByIdUseCase {
    */
   public Employee execute(String id) {
     return repository.findEmployeeById(id)
-            .orElseThrow(() -> new RuntimeException("指定したIDの従業員は見つかりません。"));
+            .orElseThrow(() -> new EmployeeNotFoundException(id));
   }
 }
