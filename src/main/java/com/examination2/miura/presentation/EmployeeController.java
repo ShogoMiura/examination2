@@ -2,6 +2,7 @@ package com.examination2.miura.presentation;
 
 import com.examination2.miura.application.FindAllEmployeesUseCase;
 import com.examination2.miura.presentation.response.AllEmployeesResponse;
+import com.examination2.miura.presentation.response.EmployeeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,5 +37,9 @@ public class EmployeeController {
   @ResponseStatus(HttpStatus.OK)
   public AllEmployeesResponse findALlEmployees() {
     return AllEmployeesResponse.of(findAllEmployeesUseCase.execute());
+  }
+
+  public EmployeeResponse findEmployeeById() {
+    return null;
   }
 }
