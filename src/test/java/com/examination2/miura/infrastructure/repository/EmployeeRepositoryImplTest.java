@@ -131,7 +131,7 @@ class EmployeeRepositoryImplTest {
       Employee expected = new Employee("3", "Saburo", "Yamada");
 
       // execute
-      Employee actual = sut.create(new EmployeeEntity("3", "Saburo", "Yamada"));
+      Employee actual = sut.create(new Employee("3", "Saburo", "Yamada"));
 
       // assert
       assertThat(actual).isEqualTo(expected);
@@ -144,7 +144,7 @@ class EmployeeRepositoryImplTest {
               .thenReturn(0);
 
       // execute & assert
-      assertThatThrownBy(() -> sut.create(new EmployeeEntity("3", "Saburo", "Yamada")))
+      assertThatThrownBy(() -> sut.create(new Employee("3", "Saburo", "Yamada")))
               .isInstanceOf(DatabaseExecutionException.class)
               .hasMessage("SQLの実行に失敗しました。");
 

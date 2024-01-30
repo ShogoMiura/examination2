@@ -47,7 +47,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   }
 
   @Override
-  public Employee create(EmployeeEntity employeeEntity) {
+  public Employee create(Employee employee) {
     return null;
   }
 }

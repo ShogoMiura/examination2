@@ -33,5 +33,5 @@ public interface EmployeeRepository {
    */
   Long getNextEmployeeId();
 
-  Employee create(EmployeeEntity employeeEntity);
+  Employee create(Employee employee);
 }
