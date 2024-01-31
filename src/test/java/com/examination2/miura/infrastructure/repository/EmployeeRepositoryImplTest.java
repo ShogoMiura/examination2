@@ -153,16 +153,33 @@ class EmployeeRepositoryImplTest {
     }
   }
 
-  @Test
-  void 従業員の情報が正しく更新できる場合() {
-    // setup
-    when(mapper.update(new EmployeeEntity("1", "Ichiro", "Yamada")))
-            .thenReturn(1);
+  @Nested
+  class 更新 {
+    @Test
+    void 従業員の情報が正しく更新できる場合() {
+      // setup
+      when(mapper.update(new EmployeeEntity("1", "Ichiro", "Yamada")))
+              .thenReturn(1);
 
-    Employee employee = new Employee("1", "Ichiro", "Yamada");
+      Employee employee = new Employee("1", "Ichiro", "Yamada");
 
-    // execute & assert
-    assertThatCode(() -> sut.updateEmployee(employee))
-            .doesNotThrowAnyException();
+      // execute & assert
+      assertThatCode(() -> sut.updateEmployee(employee))
+              .doesNotThrowAnyException();
+    }
+
+    @Test
+    void 従業員の更新が正常に行えない場合() {
+      // setup
+      when(mapper.update(new EmployeeEntity("3", "Ichiro", "Yamada")))
+              .thenReturn(0);
+
+      Employee employee = new Employee("3", "Ichiro", "Yamada");
+
+      // execute & assert
+      assertThatThrownBy(() -> sut.createEmployee(employee))
+              .isInstanceOf(DatabaseExecutionException.class)
+              .hasMessage("SQLの実行に失敗しました。");
+    }
   }
 }

@@ -62,6 +62,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
   @Override
   public void updateEmployee(Employee employee) {
-
+    Integer num = mapper.update(
+            new EmployeeEntity(employee.id(), employee.firstName(), employee.lastName())
+    );
+    if (num == 0) throw new DatabaseExecutionException("SQLの実行に失敗しました。");
   }
 }
