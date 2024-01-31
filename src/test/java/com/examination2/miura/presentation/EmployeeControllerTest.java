@@ -2,6 +2,7 @@ package com.examination2.miura.presentation;
 
 import static com.examination2.miura.JsonUtils.marshalToJson;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
@@ -83,45 +84,6 @@ class EmployeeControllerTest {
   }
 
   @Nested
-  class 新規登録 {
-    @Test
-    void 従業員情報の新規登録が正しく行える場合() {
-      // setup
-      when(createEmployeeUseCase.execute(new CreateEmployeeDto("Saburo", "Yamada")))
-              .thenReturn(new Employee("3", "Saburop", "Yamada"));
-
-      // execute & assert
-      given()
-              .contentType(MediaType.APPLICATION_JSON_VALUE)
-              .body(marshalToJson((new CreateEmployeeDto("Saburo", "Yamada"))))
-              .when()
-              .post("/v1/employees")
-              .then()
-              .statusCode(201)
-              .header("Location", is("http://localhost/v1/employees/3"));
-    }
-
-    @Test
-    void 従業員情報の新規登録の際にバリデーションエラーが発生した場合() {
-      // setup
-      when(createEmployeeUseCase.execute(new CreateEmployeeDto("", "Yamada")))
-              .thenReturn(new Employee("3", "", "Yamada"));
-
-      // execute & assert
-      given()
-              .contentType(MediaType.APPLICATION_JSON_VALUE)
-              .body(marshalToJson((new CreateEmployeeDto("%", "Yamada"))))
-              .when()
-              .post("/v1/employees")
-              .then()
-              .statusCode(400)
-              .body("code", is("0002"))
-              .body("message", is("request validation error is occurred."))
-              .body("details", is(List.of("firstName must match \"^[a-zA-Z]+$\"")));
-    }
-  }
-
-  @Nested
   class ID検索 {
     @ParameterizedTest
     @CsvSource(textBlock = """
@@ -159,6 +121,48 @@ class EmployeeControllerTest {
               .body("code", is("0003"))
               .body("message", is("specified employee [id = 99] is not found."))
               .body("details", is(Collections.EMPTY_LIST));
+    }
+  }
+
+  @Nested
+  class 新規登録 {
+    @Test
+    void 従業員情報の新規登録が正しく行える場合() {
+      // setup
+      when(createEmployeeUseCase.execute(new CreateEmployeeDto("Saburo", "Yamada")))
+              .thenReturn(new Employee("3", "Saburop", "Yamada"));
+
+      // execute & assert
+      given()
+              .contentType(MediaType.APPLICATION_JSON_VALUE)
+              .body(marshalToJson((new CreateEmployeeDto("Saburo", "Yamada"))))
+              .when()
+              .post("/v1/employees")
+              .then()
+              .statusCode(201)
+              .header("Location", is("http://localhost/v1/employees/3"));
+    }
+
+    @ParameterizedTest
+    @CsvSource(textBlock = """
+             %, Yamada, 1
+            '', Yamada, 2
+            '',     '', 4
+            """)
+    void 従業員情報の新規登録の際にバリデーションエラーが発生した場合(
+            String firstName, String lastName, Integer sizeOfDetails
+    ) {
+      // execute & assert
+      given()
+              .contentType(MediaType.APPLICATION_JSON_VALUE)
+              .body(marshalToJson((new CreateEmployeeDto(firstName, lastName))))
+              .when()
+              .post("/v1/employees")
+              .then()
+              .statusCode(400)
+              .body("code", is("0002"))
+              .body("message", is("request validation error is occurred."))
+              .body("details", hasSize(sizeOfDetails));
     }
   }
 }

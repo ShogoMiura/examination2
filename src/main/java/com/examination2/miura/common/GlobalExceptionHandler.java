@@ -4,6 +4,8 @@ import static java.util.Collections.emptyList;
 
 import com.examination2.miura.application.exception.EmployeeNotFoundException;
 import com.examination2.miura.presentation.response.ErrorResponse;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -11,9 +13,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * アプリケーション全体で発生する例外をハンドリングするための例外処理クラスです。
@@ -40,9 +39,34 @@ public class GlobalExceptionHandler {
     );
   }
 
+  /**
+   * MethodArgumentNotValidException が発生した際に処理するための例外ハンドラメソッドです。
+   * レスポンスとしてはHTTPステータスコード 400 (Bad Request) が設定され、エラーレスポンスが返されます。
+   *
+   * @param e 発生したMethodArgumentNotValidException インスタンス。
+   * @return エラーレスポンス。
+   */
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-    return null;
+    List<String> details = new ArrayList<>();
+
+    for (FieldError error : e.getFieldErrors()) {
+      log.warn(
+              "入力エラーが発生しました。{} = {}: {}",
+              error.getField(),
+              error.getRejectedValue(),
+              error.getDefaultMessage()
+      );
+
+      String detail = String.format("%s %s", error.getField(), error.getDefaultMessage());
+      details.add(detail);
+    }
+
+    return new ErrorResponse(
+            "0002",
+            "request validation error is occurred.",
+            details
+    );
   }
 }
