@@ -4,13 +4,18 @@ import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
+import com.examination2.miura.application.CreateEmployeeUseCase;
 import com.examination2.miura.application.FindAllEmployeesUseCase;
 import com.examination2.miura.application.FindEmployeeByIdUseCase;
+import com.examination2.miura.application.dto.CreateEmployeeDto;
 import com.examination2.miura.application.exception.EmployeeNotFoundException;
 import com.examination2.miura.domain.Employee;
+import com.examination2.miura.presentation.request.CreateEmployeeRequest;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
+
 import java.util.Collections;
 import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -19,6 +24,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest
@@ -32,6 +38,9 @@ class EmployeeControllerTest {
 
   @MockBean
   FindEmployeeByIdUseCase findEmployeeByIdUseCase;
+
+  @MockBean
+  CreateEmployeeUseCase createEmployeeUseCase;
 
   @BeforeEach
   void setUp() {
@@ -75,13 +84,35 @@ class EmployeeControllerTest {
             .body("employees[1].lastName", is("Yamada"));
   }
 
+  @Test
+  void 従業員情報の新規登録が正しく行える場合() {
+    // setup
+    when(createEmployeeUseCase.execute(new CreateEmployeeDto("Saburo", "Yamada")))
+            .thenReturn(new Employee("3", "Saburop", "Yamada"));
+
+    // execute & assert
+    given()
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body("""
+                    {
+                    "firstName" : "Saburo",
+                    "lastName" : "Yamada"
+                    }
+                    """)
+            .when()
+            .post("/v1/employees")
+            .then()
+            .statusCode(201)
+            .header("Location", is("http://localhost/v1/employees/3"));
+  }
+
   @Nested
   class ID検索 {
     @ParameterizedTest
     @CsvSource(textBlock = """
-      1,Taro,Yamada
-      2,Jiro,Yamada
-      """)
+            1,Taro,Yamada
+            2,Jiro,Yamada
+            """)
     void 指定したIDで従業員情報が正しく取得できる(String id, String firstName, String lastName) {
       // setup
       when(findEmployeeByIdUseCase.execute(id))
@@ -115,4 +146,5 @@ class EmployeeControllerTest {
               .body("details", is(Collections.EMPTY_LIST));
     }
   }
+
 }

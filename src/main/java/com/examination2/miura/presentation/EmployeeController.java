@@ -1,12 +1,15 @@
 package com.examination2.miura.presentation;
 
+import com.examination2.miura.application.CreateEmployeeUseCase;
 import com.examination2.miura.application.FindAllEmployeesUseCase;
 import com.examination2.miura.application.FindEmployeeByIdUseCase;
 import com.examination2.miura.domain.Employee;
+import com.examination2.miura.presentation.request.CreateEmployeeRequest;
 import com.examination2.miura.presentation.response.AllEmployeesResponse;
 import com.examination2.miura.presentation.response.EmployeeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmployeeController {
   private final FindAllEmployeesUseCase findAllEmployeesUseCase;
   private final FindEmployeeByIdUseCase findEmployeeByIdUseCase;
+  private final CreateEmployeeUseCase createEmployeeUseCase;
 
   /**
    * ルートエンドポイントへのHTTP GETリクエストを処理します。
@@ -53,5 +57,9 @@ public class EmployeeController {
   public EmployeeResponse findEmployeeById(@PathVariable String id) {
     Employee employee = findEmployeeByIdUseCase.execute(id);
     return EmployeeResponse.of(employee);
+  }
+
+  public ResponseEntity<Void> createEmployee(CreateEmployeeRequest request) {
+    return null;
   }
 }
