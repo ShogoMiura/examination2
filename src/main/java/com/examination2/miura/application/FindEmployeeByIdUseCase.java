@@ -19,7 +19,7 @@ public class FindEmployeeByIdUseCase {
    *
    * @param id 従業員ID。
    * @return 指定したIDに対応するEmployee オブジェクト。
-   * @throws RuntimeException 指定したIDの従業員が存在しない場合に投げられます。
+   * @throws EmployeeNotFoundException 指定したIDの従業員が存在しない場合に投げられます。
    */
   public Employee execute(String id) {
     return repository.findEmployeeById(id)
