@@ -21,7 +21,20 @@ class UpdateEmployeeDtoTest {
   }
 
   @Test
-  void 抜けのあるdtoを正しくEmployeeに変換できる() {
+  void firstNameがnullのdtoを正しくEmployeeに変換できる() {
+    // setup
+    UpdateEmployeeDto sut = new UpdateEmployeeDto("1", null, "Tanaka");
+    Employee expected = new Employee("1", "Taro", "Tanaka");
+
+    // execute
+    Employee actual = sut.convertToEmployee(EMPLOYEE);
+
+    // assert
+    assertThat(actual).isEqualTo(expected);
+  }
+
+  @Test
+  void lastNameがnullのdtoを正しくEmployeeに変換できる() {
     // setup
     UpdateEmployeeDto sut = new UpdateEmployeeDto("1", "Ichiro", null);
     Employee expected = new Employee("1", "Ichiro", "Yamada");
