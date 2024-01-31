@@ -50,7 +50,7 @@ public class EmployeeController {
    */
   @GetMapping("/v1/employees")
   @ResponseStatus(HttpStatus.OK)
-  public AllEmployeesResponse findALlEmployees() {
+  public AllEmployeesResponse findAllEmployees() {
     return AllEmployeesResponse.of(findAllEmployeesUseCase.execute());
   }
 
@@ -74,7 +74,9 @@ public class EmployeeController {
    */
   @PostMapping("/v1/employees")
   @ResponseStatus(HttpStatus.CREATED)
-  public ResponseEntity<Void> createEmployee(@RequestBody @Validated CreateEmployeeRequest request) {
+  public ResponseEntity<Void> createEmployee(
+          @RequestBody @Validated CreateEmployeeRequest request
+  ) {
     Employee employee = createEmployeeUseCase.execute(
             new CreateEmployeeDto(request.firstName(), request.lastName())
     );
