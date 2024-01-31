@@ -147,7 +147,6 @@ class EmployeeRepositoryImplTest {
       assertThatThrownBy(() -> sut.createEmployee(new Employee("3", "Saburo", "Yamada")))
               .isInstanceOf(DatabaseExecutionException.class)
               .hasMessage("SQLの実行に失敗しました。");
-
     }
   }
 }

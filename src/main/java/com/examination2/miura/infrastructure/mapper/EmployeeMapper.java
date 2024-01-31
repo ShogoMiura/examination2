@@ -2,7 +2,6 @@ package com.examination2.miura.infrastructure.mapper;
 
 import com.examination2.miura.infrastructure.entity.EmployeeEntity;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
