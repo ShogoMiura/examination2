@@ -7,11 +7,11 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
 import com.examination2.miura.application.CreateEmployeeUseCase;
+import com.examination2.miura.application.DeleteEmployeeUseCase;
 import com.examination2.miura.application.FindAllEmployeesUseCase;
 import com.examination2.miura.application.FindEmployeeByIdUseCase;
 import com.examination2.miura.application.UpdateEmployeeUseCase;
 import com.examination2.miura.application.dto.CreateEmployeeDto;
-import com.examination2.miura.application.dto.UpdateEmployeeDto;
 import com.examination2.miura.application.exception.EmployeeNotFoundException;
 import com.examination2.miura.domain.Employee;
 import com.examination2.miura.presentation.request.UpdateEmployeeRequest;
@@ -46,6 +46,9 @@ class EmployeeControllerTest {
 
   @MockBean
   UpdateEmployeeUseCase updateEmployeeUseCase;
+
+  @MockBean
+  DeleteEmployeeUseCase deleteEmployeeUseCase;
 
   @BeforeEach
   void setUp() {
@@ -180,6 +183,17 @@ class EmployeeControllerTest {
             .body(marshalToJson(new UpdateEmployeeRequest("Ichiro", "Tanaka")))
             .when()
             .patch("/v1/employees/1")
+            .then()
+            .statusCode(204)
+            .body(is(""));
+  }
+
+  @Test
+  void 従業員情報が正しく削除できる場合() {
+    // execute & assert
+    given()
+            .when()
+            .delete("/v1/employees/1")
             .then()
             .statusCode(204)
             .body(is(""));

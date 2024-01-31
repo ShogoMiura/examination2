@@ -111,4 +111,13 @@ public class EmployeeController {
             new UpdateEmployeeDto(id, request.firstName(), request.lastName())
     );
   }
+
+  /**
+   * 指定したIDの従業員情報を削除します。
+   *
+   * @param id 削除する従業員の ID 。
+   */
+  public void deleteEmployee(String id) {
+
+  }
 }
