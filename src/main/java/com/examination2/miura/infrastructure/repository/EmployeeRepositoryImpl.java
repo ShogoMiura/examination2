@@ -73,6 +73,14 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     isFailedSqlExecution(num);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void deleteEmployee(String id) {
+
+  }
+
   private void isFailedSqlExecution(Integer num) {
     if (num != 1) {
       log.error("SQLの実行に失敗しました。");

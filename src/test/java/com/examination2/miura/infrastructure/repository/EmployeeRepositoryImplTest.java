@@ -182,4 +182,30 @@ class EmployeeRepositoryImplTest {
               .hasMessage("SQLの実行に失敗しました。");
     }
   }
+
+  @Nested
+  class 削除{
+    @Test
+    void 従業員の情報が正しく削除できる場合() {
+      // setup
+      when(mapper.delete("1"))
+              .thenReturn(1);
+
+      // execute & assert
+      assertThatCode(() -> sut.deleteEmployee("1"))
+              .doesNotThrowAnyException();
+    }
+
+    @Test
+    void 従業員の削除が正常に行えない場合() {
+      // setup
+      when(mapper.delete("99"))
+              .thenReturn(0);
+
+      // execute & assert
+      assertThatThrownBy(() -> sut.deleteEmployee("99"))
+              .isInstanceOf(DatabaseExecutionException.class)
+              .hasMessage("SQLの実行に失敗しました。");
+    }
+  }
 }

@@ -35,7 +35,7 @@ public interface EmployeeMapper {
   /**
    * 従業員テーブルから指定したIDの従業員情報を取得します。
    *
-   * @param id 従業員ID。
+   * @param id 取得する従業員のID。
    * @return 従業員テーブルから取得したEmployee オブジェクトのリスト。
    */
   @Select("SELECT * FROM employees WHERE id = #{id}")
@@ -64,7 +64,7 @@ public interface EmployeeMapper {
   /**
    * 従業員テーブルから指定したIDの従業員情報を削除します。
    *
-   * @param id 従業員ID。
+   * @param id 削除する従業員のID。
    * @return 削除の件数。
    */
   @Delete("DELETE FROM employees WHERE id = #{id}")
