@@ -50,5 +50,12 @@ public interface EmployeeMapper {
           + "VALUES (#{id}, #{firstName}, #{lastName})")
   Integer insert(EmployeeEntity employeeEntity);
 
+  /**
+   * 従業員テーブルから指定したIDの従業員情報を更新します。
+   *
+   * @param employeeEntity 更新する従業員の情報。
+   */
+  @Update("UPDATE employees SET first_name = #{firstName}, last_name = #{lastName} "
+          + "WHERE id = #{id}")
   Integer update(EmployeeEntity employeeEntity);
 }
