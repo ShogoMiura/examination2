@@ -1,6 +1,7 @@
 package com.examination2.miura.infrastructure.repository;
 
 import static java.util.Collections.emptyList;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -143,10 +144,25 @@ class EmployeeRepositoryImplTest {
       when(mapper.insert(new EmployeeEntity("3", "Saburo", "Yamada")))
               .thenReturn(0);
 
+      Employee employee = new Employee("3", "Saburo", "Yamada");
+
       // execute & assert
-      assertThatThrownBy(() -> sut.createEmployee(new Employee("3", "Saburo", "Yamada")))
+      assertThatThrownBy(() -> sut.createEmployee(employee))
               .isInstanceOf(DatabaseExecutionException.class)
               .hasMessage("SQLの実行に失敗しました。");
     }
+  }
+
+  @Test
+  void 従業員の情報が正しく更新できる場合() {
+    // setup
+    when(mapper.update(new EmployeeEntity("1", "Ichiro", "Yamada")))
+            .thenReturn(1);
+
+    Employee employee = new Employee("1", "Ichiro", "Yamada");
+
+    // execute & assert
+    assertThatCode(() -> sut.updateEmployee(employee))
+            .doesNotThrowAnyException();
   }
 }

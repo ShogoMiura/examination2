@@ -38,4 +38,6 @@ public interface EmployeeRepository {
    * @return 登録された従業員の情報を含むEmployee オブジェクト。
    */
   Employee createEmployee(Employee employee);
+
+  void updateEmployee(Employee employee);
 }
