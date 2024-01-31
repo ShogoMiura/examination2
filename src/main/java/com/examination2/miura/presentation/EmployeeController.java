@@ -3,9 +3,12 @@ package com.examination2.miura.presentation;
 import com.examination2.miura.application.CreateEmployeeUseCase;
 import com.examination2.miura.application.FindAllEmployeesUseCase;
 import com.examination2.miura.application.FindEmployeeByIdUseCase;
+import com.examination2.miura.application.UpdateEmployeeUseCase;
 import com.examination2.miura.application.dto.CreateEmployeeDto;
+import com.examination2.miura.application.dto.UpdateEmployeeDto;
 import com.examination2.miura.domain.Employee;
 import com.examination2.miura.presentation.request.CreateEmployeeRequest;
+import com.examination2.miura.presentation.request.UpdateEmployeeRequest;
 import com.examination2.miura.presentation.response.AllEmployeesResponse;
 import com.examination2.miura.presentation.response.EmployeeResponse;
 import java.net.URI;
@@ -14,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +37,7 @@ public class EmployeeController {
   private final FindAllEmployeesUseCase findAllEmployeesUseCase;
   private final FindEmployeeByIdUseCase findEmployeeByIdUseCase;
   private final CreateEmployeeUseCase createEmployeeUseCase;
+  private final UpdateEmployeeUseCase updateEmployeeUseCase;
 
   /**
    * ルートエンドポイントへのHTTP GETリクエストを処理します。
@@ -90,7 +95,20 @@ public class EmployeeController {
     return ResponseEntity.created(uri).build();
   }
 
-  public void updateEmployee() {
-
+  /**
+   * 従業員情報を更新します。
+   *
+   * @param id 更新する従業員のID。
+   * @param request 更新する従業員の情報を含むリクエストデータ。
+   */
+  @PatchMapping("v1/employees/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void updateEmployee(
+          @PathVariable("id") String id,
+          @RequestBody UpdateEmployeeRequest request
+  ) {
+    updateEmployeeUseCase.execute(
+            new UpdateEmployeeDto(id, request.firstName(), request.lastName())
+    );
   }
 }

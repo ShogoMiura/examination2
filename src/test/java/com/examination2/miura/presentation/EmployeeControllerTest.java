@@ -179,7 +179,7 @@ class EmployeeControllerTest {
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .body(marshalToJson(new UpdateEmployeeRequest("Ichiro", "Tanaka")))
             .when()
-            .post("/v1/employees/1")
+            .patch("/v1/employees/1")
             .then()
             .statusCode(204)
             .body(is(""));
