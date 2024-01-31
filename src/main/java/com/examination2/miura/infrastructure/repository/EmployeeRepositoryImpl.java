@@ -78,7 +78,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
    */
   @Override
   public void deleteEmployee(String id) {
-
+    Integer num = mapper.delete(id);
+    isFailedSqlExecution(num);
   }
 
   private void isFailedSqlExecution(Integer num) {
