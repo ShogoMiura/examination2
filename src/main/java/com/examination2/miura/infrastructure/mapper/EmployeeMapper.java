@@ -2,6 +2,7 @@ package com.examination2.miura.infrastructure.mapper;
 
 import com.examination2.miura.infrastructure.entity.EmployeeEntity;
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -17,7 +18,7 @@ public interface EmployeeMapper {
   /**
    * データベースから次の従業員IDを取得するメソッドです。
    *
-   * @return 次の従業員ID
+   * @return 次の従業員ID。
    */
   @Select("SELECT nextval('EMPLOYEE_ID_SEQ')")
   @Options(flushCache = Options.FlushCachePolicy.TRUE)
@@ -66,5 +67,6 @@ public interface EmployeeMapper {
    * @param id 従業員ID。
    * @return 削除の件数。
    */
+  @Delete("DELETE FROM employees WHERE id = #{id}")
   Integer delete(String id);
 }
