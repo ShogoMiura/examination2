@@ -1,6 +1,7 @@
 package com.examination2.miura.presentation;
 
 import com.examination2.miura.application.CreateEmployeeUseCase;
+import com.examination2.miura.application.DeleteEmployeeUseCase;
 import com.examination2.miura.application.FindAllEmployeesUseCase;
 import com.examination2.miura.application.FindEmployeeByIdUseCase;
 import com.examination2.miura.application.UpdateEmployeeUseCase;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +40,7 @@ public class EmployeeController {
   private final FindEmployeeByIdUseCase findEmployeeByIdUseCase;
   private final CreateEmployeeUseCase createEmployeeUseCase;
   private final UpdateEmployeeUseCase updateEmployeeUseCase;
+  private final DeleteEmployeeUseCase deleteEmployeeUseCase;
 
   /**
    * ルートエンドポイントへのHTTP GETリクエストを処理します。
@@ -117,7 +120,9 @@ public class EmployeeController {
    *
    * @param id 削除する従業員の ID 。
    */
-  public void deleteEmployee(String id) {
-
+  @DeleteMapping("v1/employees/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteEmployee(@PathVariable("id") String id) {
+    deleteEmployeeUseCase.execute(id);
   }
 }
