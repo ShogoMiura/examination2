@@ -90,5 +90,7 @@ public class EmployeeController {
     return ResponseEntity.created(uri).build();
   }
 
+  public void updateEmployee() {
 
+  }
 }

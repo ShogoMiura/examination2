@@ -9,9 +9,12 @@ import static org.mockito.Mockito.when;
 import com.examination2.miura.application.CreateEmployeeUseCase;
 import com.examination2.miura.application.FindAllEmployeesUseCase;
 import com.examination2.miura.application.FindEmployeeByIdUseCase;
+import com.examination2.miura.application.UpdateEmployeeUseCase;
 import com.examination2.miura.application.dto.CreateEmployeeDto;
+import com.examination2.miura.application.dto.UpdateEmployeeDto;
 import com.examination2.miura.application.exception.EmployeeNotFoundException;
 import com.examination2.miura.domain.Employee;
+import com.examination2.miura.presentation.request.UpdateEmployeeRequest;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import java.util.Collections;
 import java.util.List;
@@ -40,6 +43,9 @@ class EmployeeControllerTest {
 
   @MockBean
   CreateEmployeeUseCase createEmployeeUseCase;
+
+  @MockBean
+  UpdateEmployeeUseCase updateEmployeeUseCase;
 
   @BeforeEach
   void setUp() {
@@ -164,5 +170,18 @@ class EmployeeControllerTest {
               .body("message", is("request validation error is occurred."))
               .body("details", hasSize(sizeOfDetails));
     }
+  }
+
+  @Test
+  void 従業員情報が正しく更新できる場合() {
+    // execute & assert
+    given()
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body(marshalToJson(new UpdateEmployeeRequest("Ichiro", "Tanaka")))
+            .when()
+            .post("/v1/employees/1")
+            .then()
+            .statusCode(204)
+            .body(is(""));
   }
 }
