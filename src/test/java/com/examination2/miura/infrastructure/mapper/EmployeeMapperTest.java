@@ -141,4 +141,18 @@ class EmployeeMapperTest {
     // assert
     assertThat(actual).isEqualTo(expected);
   }
+
+  @Test
+  @DataSet(value = "datasets/setup/employees.yml")
+  @ExpectedDataSet(value = "datasets/expected/after-delete-employees.yml")
+  void 従業員情報を正しく削除できる場合() {
+    // setup
+    Integer expected = 1;
+
+    // execute
+    Integer actual = sut.delete("1");
+
+    // assert
+    assertThat(actual).isEqualTo(expected);
+  }
 }
