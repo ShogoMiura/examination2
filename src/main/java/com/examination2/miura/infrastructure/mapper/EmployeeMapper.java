@@ -6,12 +6,22 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * 従業員情報をデータベースから取得するためのマッパーインターフェースです。
  */
 @Mapper
 public interface EmployeeMapper {
+
+  /**
+   * データベースから次の従業員IDを取得するメソッドです。
+   *
+   * @return 次の従業員ID
+   */
+  @Select("SELECT nextval('EMPLOYEE_ID_SEQ')")
+  @Options(flushCache = Options.FlushCachePolicy.TRUE)
+  Long getNextEmployeeId();
 
   /**
    * 従業員テーブルから全ての従業員情報を取得します。
@@ -40,12 +50,5 @@ public interface EmployeeMapper {
           + "VALUES (#{id}, #{firstName}, #{lastName})")
   Integer insert(EmployeeEntity employeeEntity);
 
-  /**
-   * データベースから次の従業員IDを取得するメソッドです。
-   *
-   * @return 次の従業員ID
-   */
-  @Select("SELECT nextval('EMPLOYEE_ID_SEQ')")
-  @Options(flushCache = Options.FlushCachePolicy.TRUE)
-  Long getNextEmployeeId();
+  Integer update(EmployeeEntity employeeEntity);
 }

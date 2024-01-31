@@ -126,4 +126,19 @@ class EmployeeMapperTest {
     // assert
     assertThat(actual).isEqualTo(expected);
   }
+
+  @Test
+  @DataSet(value = "datasets/setup/employees.yml")
+  @ExpectedDataSet(value = "datasets/expected/after-update-employees.yml")
+  void 従業員情報を正しく更新できる場合() {
+    // setup
+    EmployeeEntity entity = new EmployeeEntity("1", "Ichiro", "Yamada");
+    Integer expected = 1;
+
+    // execute
+    Integer actual = sut.update(entity);
+
+    // assert
+    assertThat(actual).isEqualTo(expected);
+  }
 }
