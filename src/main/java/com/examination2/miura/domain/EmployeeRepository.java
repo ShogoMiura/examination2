@@ -39,5 +39,10 @@ public interface EmployeeRepository {
    */
   Employee createEmployee(Employee employee);
 
+  /**
+   * 従業員テーブルから指定したIDの従業員情報を更新します。
+   *
+   * @param employee 更新する従業員の情報。
+   */
   void updateEmployee(Employee employee);
 }

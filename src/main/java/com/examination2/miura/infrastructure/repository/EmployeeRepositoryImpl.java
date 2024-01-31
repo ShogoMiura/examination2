@@ -10,11 +10,13 @@ import com.examination2.miura.infrastructure.mapper.EmployeeMapper;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 /**
  * 従業員リポジトリの実装クラスです。
  */
+@Slf4j
 @RequiredArgsConstructor
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
@@ -55,16 +57,26 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     Integer num = mapper.insert(
             new EmployeeEntity(employee.id(), employee.firstName(), employee.lastName())
     );
-    if (num == 0) throw new DatabaseExecutionException("SQLの実行に失敗しました。");
+    isFailedSqlExecution(num);
 
     return employee;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void updateEmployee(Employee employee) {
     Integer num = mapper.update(
             new EmployeeEntity(employee.id(), employee.firstName(), employee.lastName())
     );
-    if (num == 0) throw new DatabaseExecutionException("SQLの実行に失敗しました。");
+    isFailedSqlExecution(num);
+  }
+
+  private void isFailedSqlExecution(Integer num) {
+    if (num != 1) {
+      log.error("SQLの実行に失敗しました。");
+      throw new DatabaseExecutionException("SQLの実行に失敗しました。");
+    }
   }
 }
