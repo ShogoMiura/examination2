@@ -40,11 +40,11 @@ public interface EmployeeMapper {
   @Select("SELECT * FROM employees WHERE id = #{id}")
   EmployeeEntity findById(String id);
 
-
   /**
    * 新しい従業員をデータベースに登録します。
    *
    * @param employeeEntity データベースに登録する新しい従業員のエンティティ。
+   * @return 新規作成の件数。
    */
   @Insert("INSERT INTO employees (id, first_name, last_name) "
           + "VALUES (#{id}, #{firstName}, #{lastName})")
@@ -54,8 +54,17 @@ public interface EmployeeMapper {
    * 従業員テーブルから指定したIDの従業員情報を更新します。
    *
    * @param employeeEntity 更新する従業員の情報。
+   * @return 更新の件数。
    */
   @Update("UPDATE employees SET first_name = #{firstName}, last_name = #{lastName} "
           + "WHERE id = #{id}")
   Integer update(EmployeeEntity employeeEntity);
+
+  /**
+   * 従業員テーブルから指定したIDの従業員情報を削除します。
+   *
+   * @param id 従業員ID。
+   * @return 削除の件数。
+   */
+  Integer delete(String id);
 }
