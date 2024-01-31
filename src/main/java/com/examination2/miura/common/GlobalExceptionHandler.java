@@ -6,16 +6,21 @@ import com.examination2.miura.application.exception.EmployeeNotFoundException;
 import com.examination2.miura.presentation.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * アプリケーション全体で発生する例外をハンドリングするための例外処理クラスです。
  */
 @Slf4j
 @RestControllerAdvice
-public class GlobalExceptionHandler extends RuntimeException {
+public class GlobalExceptionHandler {
 
   /**
    * EmployeeNotFoundException が発生した際に処理するための例外ハンドラメソッドです。
@@ -33,5 +38,11 @@ public class GlobalExceptionHandler extends RuntimeException {
             String.format("specified employee [id = %s] is not found.", e.getId()),
             emptyList()
     );
+  }
+
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+    return null;
   }
 }

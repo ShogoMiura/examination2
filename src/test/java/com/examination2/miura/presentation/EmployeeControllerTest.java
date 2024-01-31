@@ -82,21 +82,43 @@ class EmployeeControllerTest {
             .body("employees[1].lastName", is("Yamada"));
   }
 
-  @Test
-  void 従業員情報の新規登録が正しく行える場合() {
-    // setup
-    when(createEmployeeUseCase.execute(new CreateEmployeeDto("Saburo", "Yamada")))
-            .thenReturn(new Employee("3", "Saburop", "Yamada"));
+  @Nested
+  class 新規登録 {
+    @Test
+    void 従業員情報の新規登録が正しく行える場合() {
+      // setup
+      when(createEmployeeUseCase.execute(new CreateEmployeeDto("Saburo", "Yamada")))
+              .thenReturn(new Employee("3", "Saburop", "Yamada"));
 
-    // execute & assert
-    given()
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(marshalToJson((new CreateEmployeeDto("Saburo", "Yamada"))))
-            .when()
-            .post("/v1/employees")
-            .then()
-            .statusCode(201)
-            .header("Location", is("http://localhost/v1/employees/3"));
+      // execute & assert
+      given()
+              .contentType(MediaType.APPLICATION_JSON_VALUE)
+              .body(marshalToJson((new CreateEmployeeDto("Saburo", "Yamada"))))
+              .when()
+              .post("/v1/employees")
+              .then()
+              .statusCode(201)
+              .header("Location", is("http://localhost/v1/employees/3"));
+    }
+
+    @Test
+    void 従業員情報の新規登録の際にバリデーションエラーが発生した場合() {
+      // setup
+      when(createEmployeeUseCase.execute(new CreateEmployeeDto("", "Yamada")))
+              .thenReturn(new Employee("3", "", "Yamada"));
+
+      // execute & assert
+      given()
+              .contentType(MediaType.APPLICATION_JSON_VALUE)
+              .body(marshalToJson((new CreateEmployeeDto("%", "Yamada"))))
+              .when()
+              .post("/v1/employees")
+              .then()
+              .statusCode(400)
+              .body("code", is("0002"))
+              .body("message", is("request validation error is occurred."))
+              .body("details", is(List.of("firstName must match \"^[a-zA-Z]+$\"")));
+    }
   }
 
   @Nested
