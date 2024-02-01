@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @UtilityClass
-public class JsonUtils {
+public class TestUtils {
 
   /**
    * 指定されたオブジェクトをJSON文字列に変換します。

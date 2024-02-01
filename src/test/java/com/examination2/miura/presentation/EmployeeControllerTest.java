@@ -1,6 +1,6 @@
 package com.examination2.miura.presentation;
 
-import static com.examination2.miura.JsonUtils.marshalToJson;
+import static com.examination2.miura.TestUtils.marshalToJson;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.hasSize;
