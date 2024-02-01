@@ -23,10 +23,10 @@ public class GlobalExceptionHandler {
 
   /**
    * EmployeeNotFoundException が発生した際に処理するための例外ハンドラメソッドです。
-   * レスポンスとしてはHTTPステータスコード 400 (Bad Request) が設定され、エラーレスポンスが返されます。
+   * レスポンスとしてはHTTPステータスコード400 (Bad Request) が設定され、エラーレスポンスが返されます。
    *
-   * @param e 発生したEmployeeNotFoundException インスタンス。
-   * @return エラーレスポンス。
+   * @param e 発生したEmployeeNotFoundExceptionインスタンス
+   * @return エラーレスポンス
    */
   @ExceptionHandler(EmployeeNotFoundException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -40,11 +40,11 @@ public class GlobalExceptionHandler {
   }
 
   /**
-   * MethodArgumentNotValidException が発生した際に処理するための例外ハンドラメソッドです。
-   * レスポンスとしてはHTTPステータスコード 400 (Bad Request) が設定され、エラーレスポンスが返されます。
+   * MethodArgumentNotValidExceptionが発生した際に処理するための例外ハンドラメソッドです。
+   * レスポンスとしてはHTTPステータスコード400 (Bad Request) が設定され、エラーレスポンスが返されます。
    *
-   * @param e 発生したMethodArgumentNotValidException インスタンス。
-   * @return エラーレスポンス。
+   * @param e 発生したMethodArgumentNotValidExceptionインスタンス
+   * @return エラーレスポンス
    */
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -70,9 +70,21 @@ public class GlobalExceptionHandler {
     );
   }
 
+  /**
+   * 予期しない例外が発生した際に処理するための例外ハンドラメソッドです。
+   * レスポンスとしてはHTTPステータスコード500 (Internal Server Error) が設定され、エラーレスポンスが返されます。
+   *
+   * @param e 発生したExceptionインスタンス
+   * @return エラーレスポンス
+   */
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public ErrorResponse handleException(Exception e) {
-    return null;
+    log.error("予期しない例外が発生しました。", e);
+    return new ErrorResponse(
+            "0099",
+            String.format("unexpected exception has occurred. [%s]", e.getMessage()),
+            emptyList()
+    );
   }
 }
