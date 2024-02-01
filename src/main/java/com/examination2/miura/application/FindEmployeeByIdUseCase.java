@@ -17,9 +17,9 @@ public class FindEmployeeByIdUseCase {
   /**
    * 指定したIDの従業員情報を取得します。
    *
-   * @param id 従業員ID。
-   * @return 指定したIDに対応するEmployee オブジェクト。
-   * @throws EmployeeNotFoundException 指定したIDの従業員が存在しない場合に投げられます。
+   * @param id 従業員ID
+   * @return 指定したIDに対応するEmployeeオブジェクト
+   * @throws EmployeeNotFoundException 指定したIDの従業員が存在しない場合に投げられます
    */
   public Employee execute(String id) {
     return repository.findEmployeeById(id)

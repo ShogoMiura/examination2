@@ -15,10 +15,10 @@ public class DeleteEmployeeUseCase {
   private final EmployeeRepository repository;
 
   /**
-   * 指定したIDの従業員情報を取得します。
+   * 指定したIDの従業員情報を削除します。
    *
-   * @param id 削除する従業員のID。
-   * @throws EmployeeNotFoundException 指定された従業員IDに対するデータが見つからない場合にスローされます。
+   * @param id 削除する従業員のID
+   * @throws EmployeeNotFoundException 指定された従業員IDに対するデータが見つからない場合にスローされます
    */
   @Transactional
   public void execute(String id) {

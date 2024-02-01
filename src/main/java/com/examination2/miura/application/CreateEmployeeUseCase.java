@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * CreateEmployeeUseCase は従業員の新規登録を行います。
+ * 従業員の新規登録を行うためのユースケースクラスです。
  */
 @RequiredArgsConstructor
 @Service
@@ -16,10 +16,10 @@ public class CreateEmployeeUseCase {
   private final EmployeeRepository repository;
 
   /**
-   * 従業員の新規登録を実行します。
+   * 従業員を新規登録します。
    *
-   * @param dto 新規登録する従業員情報。
-   * @return 登録されたEmployee オブジェクト。
+   * @param dto 新規登録する従業員情報を含むDTOオブジェクト
+   * @return 登録されたEmployeeオブジェクト
    */
   @Transactional
   public Employee execute(CreateEmployeeDto dto) {

@@ -54,7 +54,7 @@ public class EmployeeController {
   /**
    * すべての従業員情報を返します。
    *
-   * @return すべての従業員情報を含む AllEmployeesResponseオブジェクト。
+   * @return すべての従業員情報を含むAllEmployeesResponseオブジェクト
    */
   @GetMapping("/v1/employees")
   @ResponseStatus(HttpStatus.OK)
@@ -63,9 +63,10 @@ public class EmployeeController {
   }
 
   /**
-   * 指定された従業員情報を取得し、EmployeeResponse として返します。
+   * 指定された従業員情報を返します。
    *
-   * @return 指定されたIDの従業員情報を含む EmployeeResponseオブジェクト。
+   * @param id 取得する従業員のID
+   * @return 指定されたIDの従業員情報を含むEmployeeResponseオブジェクト
    */
   @GetMapping("v1/employees/{id}")
   @ResponseStatus(HttpStatus.OK)
@@ -78,7 +79,7 @@ public class EmployeeController {
    * 従業員を新規登録します。
    *
    * @param request 作成する従業員の情報を含むリクエストデータ
-   * @return 作成された従業員のリソースへのURIとともに、HTTPステータス201を返します。
+   * @return 作成された従業員のリソースへのURIとともに、HTTPステータス201を返します
    */
   @PostMapping("/v1/employees")
   @ResponseStatus(HttpStatus.CREATED)
@@ -101,8 +102,8 @@ public class EmployeeController {
   /**
    * 従業員情報を更新します。
    *
-   * @param id 更新する従業員のID。
-   * @param request 更新する従業員の情報を含むリクエストデータ。
+   * @param id 更新する従業員のID
+   * @param request 更新する従業員の情報を含むリクエストデータ
    */
   @PatchMapping("v1/employees/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -118,7 +119,7 @@ public class EmployeeController {
   /**
    * 指定したIDの従業員情報を削除します。
    *
-   * @param id 削除する従業員の ID 。
+   * @param id 削除する従業員のID
    */
   @DeleteMapping("v1/employees/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)

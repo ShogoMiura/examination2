@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 従業員情報を更新するユースケースを表すサービスクラスです。
+ * 指定したIDの従業員情報を更新するユースケースを表すサービスクラスです。
  */
 @RequiredArgsConstructor
 @Service
@@ -18,10 +18,10 @@ public class UpdateEmployeeUseCase {
 
 
   /**
-   * 指定された従業員IDに基づいて従業員情報を更新します。
+   * 指定した従業員IDの従業員情報を更新します。
    *
    * @param dto 更新する従業員の情報を含むDTOオブジェクト
-   * @throws EmployeeNotFoundException 指定された従業員IDに対するデータが見つからない場合にスローされます。
+   * @throws EmployeeNotFoundException 指定された従業員IDに対するデータが見つからない場合にスローされます
    */
   @Transactional
   public void execute(UpdateEmployeeDto dto) {

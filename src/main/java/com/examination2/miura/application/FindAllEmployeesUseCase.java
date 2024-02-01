@@ -17,7 +17,7 @@ public class FindAllEmployeesUseCase {
   /**
    * 全ての従業員情報を取得します。
    *
-   * @return Employee オブジェクトのリスト。
+   * @return Employeeオブジェクトのリスト
    */
   public List<Employee> execute() {
     return repository.findAllEmployees();
