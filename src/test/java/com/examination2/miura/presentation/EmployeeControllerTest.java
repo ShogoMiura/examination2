@@ -2,6 +2,7 @@ package com.examination2.miura.presentation;
 
 import static com.examination2.miura.JsonUtils.marshalToJson;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
@@ -197,5 +198,20 @@ class EmployeeControllerTest {
             .then()
             .statusCode(204)
             .body(is(""));
+  }
+
+  @Test
+  void 予期しない例外が発生した場合() {
+    when(findAllEmployeesUseCase.execute())
+            .thenThrow(RuntimeException.class);
+
+    given()
+            .when()
+            .get("/v1/employees")
+            .then()
+            .statusCode(500)
+            .body("code", is("0099"))
+            .body("message", is("unexpected exception has occurred. [null]"))
+            .body("details", is(emptyList()));
   }
 }

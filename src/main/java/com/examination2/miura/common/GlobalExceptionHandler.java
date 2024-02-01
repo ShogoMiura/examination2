@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(EmployeeNotFoundException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ErrorResponse handleEmployeeNotFoundException(EmployeeNotFoundException e) {
-    log.warn("指定されたIDの従業員情報が見つかりません。id = {}", e.getId(), e);
+    log.warn("指定されたIDの従業員情報が見つかりません。[id = {}]", e.getId(), e);
     return new ErrorResponse(
             "0003",
             String.format("specified employee [id = %s] is not found.", e.getId()),
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
 
     for (FieldError error : e.getFieldErrors()) {
       log.warn(
-              "入力エラーが発生しました。{} = {}: {}",
+              "入力エラーが発生しました。[{} = {}: {}]",
               error.getField(),
               error.getRejectedValue(),
               error.getDefaultMessage()
@@ -68,5 +68,11 @@ public class GlobalExceptionHandler {
             "request validation error is occurred.",
             details
     );
+  }
+
+  @ExceptionHandler(Exception.class)
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  public ErrorResponse handleException(Exception e) {
+    return null;
   }
 }
