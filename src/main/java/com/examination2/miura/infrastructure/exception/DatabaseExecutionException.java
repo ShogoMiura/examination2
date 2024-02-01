@@ -6,9 +6,9 @@ package com.examination2.miura.infrastructure.exception;
 public class DatabaseExecutionException extends RuntimeException {
 
   /**
-   * 指定されたエラーメッセージで新しい DatabaseExecutionExceptionを構築します。
+   * 指定されたエラーメッセージで新しいDatabaseExecutionExceptionを構築します。
    *
-   * @param message エラーメッセージ。
+   * @param message エラーメッセージ
    */
   public DatabaseExecutionException(String message) {
     super(message);

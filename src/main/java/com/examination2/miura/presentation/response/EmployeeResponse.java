@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 従業員情報のレスポンスを表すクラスです。
  *
- * @param id        従業員のID。
- * @param firstName 従業員の名前。
- * @param lastName  従業員の姓。
+ * @param id        従業員のID
+ * @param firstName 従業員の名前
+ * @param lastName  従業員の姓
  */
 public record EmployeeResponse(
         @JsonProperty("id")
@@ -21,8 +21,8 @@ public record EmployeeResponse(
   /**
    * EmployeeオブジェクトからEmployeeResponseオブジェクトを生成するためのファクトリーメソッドです。
    *
-   * @param employee 変換元のEmployeeオブジェクト。
-   * @return 生成されたEmployeeResponseオブジェクト。
+   * @param employee 変換元のEmployeeオブジェクト
+   * @return 生成されたEmployeeResponseオブジェクト
    */
   public static EmployeeResponse of(Employee employee) {
     return new EmployeeResponse(

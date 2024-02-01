@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * 全ての従業員のレスポンスを表すクラスです。
+ * 全ての従業員情報のレスポンスを表すクラスです。
  *
- * @param allEmployeesResponse EmployeeResponse オブジェクトのリスト。
+ * @param allEmployeesResponse EmployeeResponseオブジェクトのリスト
  */
 public record AllEmployeesResponse(
         @JsonProperty("employees")
@@ -17,8 +17,8 @@ public record AllEmployeesResponse(
    * EmployeeオブジェクトのリストからAllEmployeesResponseオブジェクトを生成するためのファクトリーメソッドです。
    * リスト内の各Employeeオブジェクトは、EmployeeResponse.ofメソッドを使用して対応するEmployeeResponseオブジェクトに変換されます。
    *
-   * @param employees 変換元のEmployeeオブジェクトのリスト。
-   * @return 生成されたAllEmployeesResponseオブジェクト。
+   * @param employees 変換元のEmployeeオブジェクトのリスト
+   * @return 生成されたAllEmployeesResponseオブジェクト
    */
   public static AllEmployeesResponse of(List<Employee> employees) {
     return new AllEmployeesResponse(employees.stream().map(EmployeeResponse::of).toList());

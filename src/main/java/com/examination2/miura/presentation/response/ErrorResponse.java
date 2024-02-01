@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * エラーレスポンスを表現するレコードクラスです。
+ * エラーレスポンスを表すクラスです。
  *
- * @param code エラーコード。
- * @param message エラーメッセージ。
- * @param details エラーの詳細。
+ * @param code エラーコード
+ * @param message エラーメッセージ
+ * @param details エラーの詳細
  */
 public record ErrorResponse(
         @JsonProperty("code")

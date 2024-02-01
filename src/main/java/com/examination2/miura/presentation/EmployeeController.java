@@ -63,7 +63,7 @@ public class EmployeeController {
   }
 
   /**
-   * 指定された従業員情報を返します。
+   * 指定されたIDの従業員情報を返します。
    *
    * @param id 取得する従業員のID
    * @return 指定されたIDの従業員情報を含むEmployeeResponseオブジェクト

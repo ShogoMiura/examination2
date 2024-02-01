@@ -6,10 +6,10 @@ import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * 従業員を作成するためのリクエストデータを表すレコードクラスです。
+ * 従業員を作成するためのリクエストデータを表すクラスです。
  *
- * @param firstName 従業員の名前。
- * @param lastName 従業員の姓。
+ * @param firstName 従業員の名前
+ * @param lastName 従業員の姓
  */
 public record CreateEmployeeRequest(
         @JsonProperty("firstName")

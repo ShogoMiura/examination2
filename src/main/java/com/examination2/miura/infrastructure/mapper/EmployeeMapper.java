@@ -16,27 +16,27 @@ import org.apache.ibatis.annotations.Update;
 public interface EmployeeMapper {
 
   /**
-   * データベースから次の従業員IDを取得するメソッドです。
+   * データベースから次の従業員IDを取得します。
    *
-   * @return 次の従業員ID。
+   * @return 次の従業員ID
    */
   @Select("SELECT nextval('EMPLOYEE_ID_SEQ')")
   @Options(flushCache = Options.FlushCachePolicy.TRUE)
   Long getNextEmployeeId();
 
   /**
-   * 従業員テーブルから全ての従業員情報を取得します。
+   * データベースから全ての従業員情報を取得します。
    *
-   * @return 従業員テーブルから取得したEmployeeEntity オブジェクトのリスト。
+   * @return 従業員テーブルから取得したEmployeeEntityオブジェクトのリスト
    */
   @Select("SELECT * FROM employees")
   List<EmployeeEntity> findAll();
 
   /**
-   * 従業員テーブルから指定したIDの従業員情報を取得します。
+   * データベースから指定したIDの従業員情報を取得します。
    *
-   * @param id 取得する従業員のID。
-   * @return 従業員テーブルから取得したEmployee オブジェクトのリスト。
+   * @param id 取得する従業員のID
+   * @return 従業員テーブルから取得したEmployeeオブジェクトのリスト
    */
   @Select("SELECT * FROM employees WHERE id = #{id}")
   EmployeeEntity findById(String id);
@@ -44,28 +44,28 @@ public interface EmployeeMapper {
   /**
    * 新しい従業員をデータベースに登録します。
    *
-   * @param employeeEntity データベースに登録する新しい従業員のエンティティ。
-   * @return 新規作成の件数。
+   * @param employeeEntity データベースに登録する新しい従業員のエンティティ
+   * @return 新規作成の件数
    */
   @Insert("INSERT INTO employees (id, first_name, last_name) "
           + "VALUES (#{id}, #{firstName}, #{lastName})")
   Integer insert(EmployeeEntity employeeEntity);
 
   /**
-   * 従業員テーブルから指定したIDの従業員情報を更新します。
+   * データベースの指定したIDの従業員情報を更新します。
    *
-   * @param employeeEntity 更新する従業員の情報。
-   * @return 更新の件数。
+   * @param employeeEntity 更新する従業員の情報
+   * @return 更新の件数
    */
   @Update("UPDATE employees SET first_name = #{firstName}, last_name = #{lastName} "
           + "WHERE id = #{id}")
   Integer update(EmployeeEntity employeeEntity);
 
   /**
-   * 従業員テーブルから指定したIDの従業員情報を削除します。
+   * データベースから指定したIDの従業員情報を削除します。
    *
-   * @param id 削除する従業員のID。
-   * @return 削除の件数。
+   * @param id 削除する従業員のID
+   * @return 削除の件数
    */
   @Delete("DELETE FROM employees WHERE id = #{id}")
   Integer delete(String id);
