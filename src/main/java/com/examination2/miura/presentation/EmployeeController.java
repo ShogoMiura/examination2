@@ -56,7 +56,7 @@ public class EmployeeController {
    *
    * @return すべての従業員情報を含むAllEmployeesResponseオブジェクト
    */
-  @GetMapping("/v1/employees")
+  @GetMapping("v1/employees")
   @ResponseStatus(HttpStatus.OK)
   public AllEmployeesResponse findAllEmployees() {
     return AllEmployeesResponse.of(findAllEmployeesUseCase.execute());
@@ -81,7 +81,7 @@ public class EmployeeController {
    * @param request 作成する従業員の情報を含むリクエストデータ
    * @return 作成された従業員のリソースへのURIとともに、HTTPステータス201を返します
    */
-  @PostMapping("/v1/employees")
+  @PostMapping("v1/employees")
   @ResponseStatus(HttpStatus.CREATED)
   public ResponseEntity<Void> createEmployee(
           @RequestBody @Validated CreateEmployeeRequest request
