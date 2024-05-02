@@ -25,9 +25,9 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4.1.1
-
-      - name: Set vars
-        id: set_vars
-        run: |
-          echo $DEPLOY_ENV
-          echo $TAG
+#
+#      - name: Set vars
+#        id: set_vars
+#        run: |
+#          echo $DEPLOY_ENV
+#          echo $TAG
