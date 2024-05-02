@@ -20,9 +20,6 @@ permissions:
 jobs:
   set-env:
     runs-on: ubuntu-latest
-    outputs:
-      DEPLOY_ENV: ${{ steps.set_vars.outputs.DEPLOY_ENV }}
-      TAG: ${{ steps.set_vars.outputs.TAG }}
     steps:
       - name: checkout
         uses: actions/checkout@v4.1.1
@@ -42,9 +39,9 @@ jobs:
             echo "Exit because of unexpected way to deploy. Please check target env name."
             exit 1
           fi
-          echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_OUTPUT
+          echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
 
       - name: Setup vars
         run: |
-          echo "DEPLOY_ENV=prd" >> $GITHUB_ENV
+          echo $DEPLOY_ENV
           echo "TAG=$(echo '${{ github.ref }}' | sed -e 's/refs\/tags\///g' | sed -e 's/refs\/heads\///g')" >> $GITHUB_ENV
