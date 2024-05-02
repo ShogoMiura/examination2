@@ -30,13 +30,13 @@ jobs:
       - name: Set vars
         id: set_vars
         run: |
-          if ${{ contains( github.event.inputs.target_env_name, 'dev') }}; then
+          if [[ '${{ github.ref_name }}' == 'deploydev' ]]; then
             readonly DEPLOY_ENV='dev'
-          elif ${{ contains( github.event.inputs.target_env_name, 'qas') }};; then
+          elif [[ '${{ github.ref_name }}' == 'deployqas' ]]; then
             readonly DEPLOY_ENV='qas'
-          elif ${{ contains( github.event.inputs.target_env_name, 'stg') }};; then
+          elif [[ $(echo '${{ github.ref }}' | sed -e 's/refs\/tags\///g' | sed -e 's/refs\/heads\///g') == 'stg' ]]; then
             readonly DEPLOY_ENV='stg'
-          elif ${{ contains( github.event.inputs.target_env_name, 'prd') }};; then
+          elif [[ $(echo '${{ github.ref }}' | sed -e 's/refs\/tags\///g' | sed -e 's/refs\/heads\///g') == 'prd' ]]; then
             readonly DEPLOY_ENV='prd'
           elif [[ '${{ github.ref }}' =~ \merge* ]]; then
             readonly DEPLOY_ENV='dev'
