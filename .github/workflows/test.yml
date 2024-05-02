@@ -44,7 +44,7 @@ jobs:
           fi
           echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_OUTPUT
 
-#      - name: Setup vars
-#        run: |
-#          echo "DEPLOY_ENV=prd" >> $GITHUB_ENV
-#          echo "TAG=$(echo '${{ github.ref }}' | sed -e 's/refs\/tags\///g' | sed -e 's/refs\/heads\///g')" >> $GITHUB_ENV
+      - name: Setup vars
+        run: |
+          echo "DEPLOY_ENV=prd" >> $GITHUB_ENV
+          echo "TAG=$(echo '${{ github.ref }}' | sed -e 's/refs\/tags\///g' | sed -e 's/refs\/heads\///g')" >> $GITHUB_ENV
