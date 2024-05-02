@@ -16,8 +16,8 @@ permissions:
 env:
   MAVEN_CACHE_FOLDER: ${{ github.workspace }}/.m2/repository
   MAVEN_OPTS: '-Dmaven.repo.local=${{ github.workspace }}/.m2/repository'
-#  DEPLOY_ENV: ${{ github.event.inputs.target_env_name }}
-#  TAG: ${{ github.ref_name }}
+  DEPLOY_ENV: ${{ github.event.inputs.target_env_name }}
+  TAG: ${{ github.ref_name }}
 
 jobs:
   set-env:
