@@ -1,0 +1,55 @@
+on:
+  workflow_dispatch:
+    inputs:
+      target_env_name:
+        type: choice
+        description: Target env name [deploydev, deployqas, stg, prd]
+        required: true
+        options: [deploydev, deployqas, stg, prd]
+      version:
+        description: 'Release Version'
+        required: false
+        default: ''
+
+permissions:
+  id-token: write
+  pull-requests: write
+  contents: read
+  actions: read
+
+env:
+  MAVEN_CACHE_FOLDER: ${{ github.workspace }}/.m2/repository
+  MAVEN_OPTS: '-Dmaven.repo.local=${{ github.workspace }}/.m2/repository'
+
+jobs:
+  set-env:
+    runs-on: ubuntu-latest
+    outputs:
+      DEPLOY_ENV: ${{ steps.set_vars.outputs.DEPLOY_ENV }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Set vars
+        id: set_vars
+        run: |
+          if [[ '${{ github.ref_name }}' == 'deploydev' ]]; then
+            readonly DEPLOY_ENV='dev'
+          elif [[ '${{ github.ref_name }}' == 'deployqas' ]]; then
+            readonly DEPLOY_ENV='qas'
+          elif [[ '${{ github.ref_name }}' == 'stg' ]]; then
+            readonly DEPLOY_ENV='stg'
+          elif [[ '${{ github.ref_name }}' == 'prd' ]]; then
+            readonly DEPLOY_ENV='prd'
+          elif [[ '${{ github.ref }}' =~ \merge* ]]; then
+            readonly DEPLOY_ENV='dev'
+          else
+            echo "Exit because of unexpected way to deploy. Please check target env name."
+            exit 1
+          fi
+          echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_OUTPUT
+
+      - name: Setup vars
+        run: |
+          echo "DEPLOY_ENV=prd" >> $GITHUB_ENV
+          echo "TAG=$(echo '${{ github.ref }}' | sed -e 's/refs\/tags\///g' | sed -e 's/refs\/heads\///g')" >> $GITHUB_ENV
