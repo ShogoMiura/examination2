@@ -29,21 +29,5 @@ jobs:
       - name: Set vars
         id: set_vars
         run: |
-          if [[ '${{ github.event.inputs.target_env_name }}' == 'deploydev' ]]; then
-            readonly DEPLOY_ENV='dev'
-          elif [[ '${{ github.event.inputs.target_env_name }}' == 'deployqas' ]]; then
-            readonly DEPLOY_ENV='qas'
-          elif [[ '${{ github.event.inputs.target_env_name }}' == 'stg' ]]; then
-            readonly DEPLOY_ENV='stg'
-          elif [[ '${{ github.event.inputs.target_env_name }}' == 'prd' ]]; then
-            readonly DEPLOY_ENV='prd'
-          else
-            echo "Exit because of unexpected way to deploy. Please check target env name."
-            exit 1
-          fi
-          echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
-
-      - name: Setup vars
-        run: |
           echo $DEPLOY_ENV
           echo $TAG
