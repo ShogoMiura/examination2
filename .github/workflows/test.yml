@@ -13,9 +13,11 @@ permissions:
   contents: read
   actions: read
 
-#env:
-#  MAVEN_CACHE_FOLDER: ${{ github.workspace }}/.m2/repository
-#  MAVEN_OPTS: '-Dmaven.repo.local=${{ github.workspace }}/.m2/repository'
+env:
+  MAVEN_CACHE_FOLDER: ${{ github.workspace }}/.m2/repository
+  MAVEN_OPTS: '-Dmaven.repo.local=${{ github.workspace }}/.m2/repository'
+  DEPLOY_ENV: ${{ github.event.inputs.target_env_name }}
+  TAG: ${{ github.ref_name }}
 
 jobs:
   set-env:
@@ -24,25 +26,25 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Set vars
-        id: set_vars
-        run: |
-          if [[ '${{ github.event.inputs.target_env_name }}' == 'deploydev' ]]; then
-            readonly DEPLOY_ENV='dev'
-          elif [[ '${{ github.event.inputs.target_env_name }}' == 'deployqas' ]]; then
-            readonly DEPLOY_ENV='qas'
-          elif [[ '${{ github.event.inputs.target_env_name }}' == 'stg' ]]; then
-            readonly DEPLOY_ENV='stg'
-          elif [[ '${{ github.event.inputs.target_env_name }}' == 'prd' ]]; then
-            readonly DEPLOY_ENV='prd'
-          else
-            echo "Exit because of unexpected way to deploy. Please check target env name."
-            exit 1
-          fi
-          echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
+#      - name: Set vars
+#        id: set_vars
+#        run: |
+#          if [[ '${{ github.event.inputs.target_env_name }}' == 'deploydev' ]]; then
+#            readonly DEPLOY_ENV='dev'
+#          elif [[ '${{ github.event.inputs.target_env_name }}' == 'deployqas' ]]; then
+#            readonly DEPLOY_ENV='qas'
+#          elif [[ '${{ github.event.inputs.target_env_name }}' == 'stg' ]]; then
+#            readonly DEPLOY_ENV='stg'
+#          elif [[ '${{ github.event.inputs.target_env_name }}' == 'prd' ]]; then
+#            readonly DEPLOY_ENV='prd'
+#          else
+#            echo "Exit because of unexpected way to deploy. Please check target env name."
+#            exit 1
+#          fi
+#          echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
 
       - name: Setup vars
         run: |
           echo $DEPLOY_ENV
-          echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
+#          echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
           echo $TAG
