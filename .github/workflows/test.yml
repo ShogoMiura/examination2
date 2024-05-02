@@ -6,10 +6,6 @@ on:
         description: Target env name [deploydev, deployqas, stg, prd]
         required: true
         options: [deploydev, deployqas, stg, prd]
-      version:
-        description: 'Release Version'
-        required: false
-        default: ''
 
 permissions:
   id-token: write
@@ -17,9 +13,9 @@ permissions:
   contents: read
   actions: read
 
-env:
-  MAVEN_CACHE_FOLDER: ${{ github.workspace }}/.m2/repository
-  MAVEN_OPTS: '-Dmaven.repo.local=${{ github.workspace }}/.m2/repository'
+#env:
+#  MAVEN_CACHE_FOLDER: ${{ github.workspace }}/.m2/repository
+#  MAVEN_OPTS: '-Dmaven.repo.local=${{ github.workspace }}/.m2/repository'
 
 jobs:
   set-env:
