@@ -28,10 +28,8 @@ jobs:
 
       - name: Set vars
         id: set_vars
-        run: |
+        run: echo "これは適当な文字列です"
 
       - name: Setup vars
-        run: |
+        run: echo "別の適当な文字列を出力します"
       
-      - name: do nothing
-        run: |
